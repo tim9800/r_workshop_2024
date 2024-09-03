@@ -9,7 +9,7 @@ layout: default
 
 ## Before the workshop
 
-*   [Installing R and R Studio]()
+*   [Installing R and R Studio](https://tim9800.github.io/r_workshop_2024/installation.html)
 *   
 
 ## Workshop slides
