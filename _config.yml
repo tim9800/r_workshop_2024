@@ -7,7 +7,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: /r_workshop_2024/ # the subpath of your site, e.g. /blog
 url: https://tim9800.github.io # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  tim9800
-logo: 
+logo: https://raw.githubusercontent.com/tim9800/r_workshop_2024/master/img/logo.svg
 show_downloads: true
 
 # Build settings
