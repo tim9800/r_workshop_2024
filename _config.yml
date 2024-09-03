@@ -29,7 +29,7 @@ url: https://tim9800.github.io # the base hostname & protocol for your site, e.g
 github_username:  tim9800
 
 # Build settings
-theme: minima
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
