@@ -7,6 +7,11 @@ layout: default
 
 # Introduction to R
 
+## Before the workshop
+
+*   [Installing R and R Studio]()
+*   
+
 ## Workshop slides
 
 *   [Presentation slides]()
