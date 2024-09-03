@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Installing R and RStudio
 You will need to install both R and RStudio to follow this workshop. The process is straightforward
 and essentially the same for both Mac and Windows.
