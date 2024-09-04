@@ -11,8 +11,9 @@ layout: default
 
 *   [Installing R and R Studio](https://tim9800.github.io/r_workshop_2024/installation.html)
 *   [Installing tools for compiling packages](https://tim9800.github.io/r_workshop_2024/compilation.html)
-* \[\[OPTIONAL\][Installing `tidyverse`](https://tim9800.github.io/r_workshop_2024/tidyverse.html)
+* \[OPTIONAL\][Installing `tidyverse`](https://tim9800.github.io/r_workshop_2024/tidyverse.html)
 	* We will go through this step in the workshop as well, but it will be handy if you can do this step before coming
+
 ## Workshop slides
 
 *   [Presentation slides]()
