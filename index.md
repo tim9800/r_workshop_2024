@@ -16,7 +16,7 @@ layout: default
 
 ## Workshop slides
 
-*   [Presentation slides]()
+*   [Presentation slides](https://tim9800.github.io/r_workshop_2024/slides1/slides1.html)
 
 ## Readings in the presentation
 
