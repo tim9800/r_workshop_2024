@@ -1,0 +1,133 @@
+---
+title: "R Workshop 2024"
+subtitle: "<i>BMC YMH Team</i>"  
+author: 
+  - "Timothy Wong"
+date: 'Spring 2024'
+output:
+  xaringan::moon_reader:
+    css: ["cols.css", "xaringan-themer.css"]
+    nature:
+      beforeInit: "cols_macro.js"
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.width=9, fig.height=3.5, fig.retina=3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+blue <- "#1381B0"
+orange <- "#FF961C"
+white <- "#FFFFFF"
+
+
+style_duo_accent(
+  primary_color = blue,
+  secondary_color = orange,
+  inverse_header_color = white,
+  text_bold_color = orange,
+  
+  # Custom
+  title_slide_background_color = white,
+  title_slide_text_color = blue
+)
+```
+
+name: housekeeping
+
+## Housekeeping
+
+1. Did you bring a laptop (Mac or Windows)?
+
+2. Have you downloaded R and RStudio?
+
+3. Have you downloaded XCode (Mac) or Rtools (Windows)?
+
+If are stuck on Step 2 or 3, **please let us know now**
+---
+name: colors
+
+## Overview
+
+1. What is R?
+
+2. The RStudio interface
+
+3. Objects and functions
+
+4. Packages
+
+5. Reading in files and the working directory
+
+6. Manipulating data using `tidyverse`
+
+---
+class: inverse center middle
+
+# What is R?
+
+---
+
+name: why R
+
+## Why use R?
+
+.pull-left[
+### Pros
+
+* Free
+
+* Open-source
+
+* Huge community of experts
+
+* Is a *language* (more on this later)
+
+]
+
+.pull-right[
+### Cons
+
+* Can be difficult to pick up
+
+* Curse of freedom
+]
+
+--
+<br>
+
+**Thesis**: The pros of learning R outweight the cons
+
+---
+name: what R
+## What is R?
+![:col_header Statistical, programming, language]
+![:col_row Regression, , ]
+--
+![:col_row ANOVA, , ]
+--
+![:col_row ,Computer instructions , ]
+
+---
+class: inverse center middle
+
+# The RStudio interface
+
+---
+
+
+
