@@ -6,13 +6,12 @@ author:
 date: 'Spring 2024'
 output:
   xaringan::moon_reader:
-    css: ["cols.css", "xaringan-themer.css"]
+    css: ["xaringan-themer.css", "custom.css"]
     nature:
-      beforeInit: "cols_macro.js"
       slideNumberFormat: "%current%"
-      highlightStyle: github
+      highlightStyle: tomorrow-night-bright
       highlightLines: true
-      countIncrementalSlides: true
+      countIncrementalSlides: false
 ---
 
 ```{r setup, include=FALSE}
@@ -115,19 +114,80 @@ name: why R
 ---
 name: what R
 ## What is R?
-![:col_header Statistical, programming, language]
-![:col_row Regression, , ]
---
-![:col_row ANOVA, , ]
---
-![:col_row ,Computer instructions , ]
+
+.col-flex-container[
+  .column[
+  ### Statistical
+  ANOVA
+  
+  Regression
+  
+  t testing
+  
+  Correlations
+]
+  
+  .column[
+  ### Programming
+  
+  Talking to the computer
+]
+
+  .column[
+  ### Language
+  The means by which we talk to the computer
+  * Syntax/"grammar"
+  
+  * Meaning
+]
+]
+
 
 ---
 class: inverse center middle
 
 # The RStudio interface
 
+
+---
+name: rstudio info
+
+# The interface
+
+RStudio is an **integrated development environment** for R. It is separate to R and makes life easier than just working with R.
+
+---
+![rgui](https://tim9800.github.io/r_workshop_2024/img/rgui.png)
 ---
 
+![rstudio](https://tim9800.github.io/r_workshop_2024/img/rstudio.png)
+---
+template: rstudio info
+
+* Top left: **Text editor** and data tabs
+
+* Top right: **Environment**, displays a list of R objects
+
+* Bottom left: **Console**, runs R code
+
+* Bottom right: Files, plots, packages, **help**, viewer
+
+---
+## Basic functionality
+
+Let's open our first R script and play around with the console. On the top left of the screen, navigate to `File > New File > R Script`
+
+```{r calculator, eval = FALSE}
+> 1 + 1
+2
+```
+
+--
+R can be used as a calculator
+
+--
+```{r autocomplete, eval = FALSE}
+> read.
+```
 
 
