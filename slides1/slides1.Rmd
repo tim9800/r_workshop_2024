@@ -80,38 +80,6 @@ class: inverse center middle
 # What is R?
 
 ---
-
-name: why R
-
-## Why use R?
-
-.pull-left[
-### Pros
-
-* Free
-
-* Open-source
-
-* Huge community of experts
-
-* Is a *language* (more on this later)
-
-]
-
-.pull-right[
-### Cons
-
-* Can be difficult to pick up
-
-* Curse of freedom
-]
-
---
-<br>
-
-**Thesis**: The pros of learning R outweight the cons
-
----
 name: what R
 ## What is R?
 
@@ -141,6 +109,37 @@ name: what R
   * Meaning
 ]
 ]
+---
+
+name: why R
+
+## Why use R?
+
+.pull-left[
+### Pros
+
+* Free
+
+* Open-source
+
+* Huge community of experts
+
+* Is a *language*
+
+]
+
+.pull-right[
+### Cons
+
+* Can be difficult to pick up
+
+* Curse of freedom
+]
+
+--
+<br>
+
+**Thesis**: The pros of learning R outweight the cons
 
 
 ---
@@ -152,12 +151,14 @@ class: inverse center middle
 ---
 name: rstudio info
 
-# The interface
+## Navigating RStudio
 
 RStudio is an **integrated development environment** for R. It is separate to R and makes life easier than just working with R.
 
 ---
 ![rgui](https://tim9800.github.io/r_workshop_2024/img/rgui.png)
+---
+![rcmd](https://tim9800.github.io/r_workshop_2024/img/rcmd.png)
 ---
 
 ![rstudio](https://tim9800.github.io/r_workshop_2024/img/rstudio.png)
@@ -173,16 +174,25 @@ template: rstudio info
 * Bottom right: Files, plots, packages, **help**, viewer
 
 ---
+name: basicf
 ## Basic functionality
+
 
 Let's open our first R script and play around with the console. On the top left of the screen, navigate to `File > New File > R Script`
 
-```{r calculator, eval = FALSE}
+---
+template: basicf
+```{r calculator1, eval = FALSE}
 > 1 + 1
-2
 ```
 
---
+---
+template: basicf
+```{r calculator2, eval = FALSE}
+> 1 + 1
+[1] 2
+```
+
 R can be used as a calculator
 
 --
@@ -205,3 +215,34 @@ R can autocomplete commands
 --
 
 R can give you help on unfamiliar commands
+
+---
+class: inverse center middle
+
+# Objects and functions
+
+---
+## What is an object?
+In R we care about objects and their transformations
+
+> *Everything that exists in R is an object.* <br>
+> *Everything that happens in R is a function call.* <br>
+> **John Chambers**
+
+R stores everything as objects
+
+Objects
+
+* Belong to **classes**
+
+* Have content (in R, **values**)
+
+* Have **names**<sup>1</sup>
+
+--
+
+.footnote[[1] Not completely true. Hadley Wickham insists that names have objects<sup>[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)</sup>. To avoid this discussion, I will say that a name *refers to* or *references* an object.]
+
+---
+## Kinds of objects
+
