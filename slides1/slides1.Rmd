@@ -186,8 +186,22 @@ Let's open our first R script and play around with the console. On the top left 
 R can be used as a calculator
 
 --
+
 ```{r autocomplete, eval = FALSE}
 > read.
+... (press tab twice!)
 ```
 
+--
 
+R can autocomplete commands
+
+--
+
+```{r help, eval = FALSE}
+> ?read.csv()
+```
+
+--
+
+R can give you help on unfamiliar commands
