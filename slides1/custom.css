@@ -34,4 +34,13 @@
     margin: 0px;
   }
 
+.remark-inline-code{
+  background: #E0E0E0;
+  padding: 2px;
+  color: #000000;
+  border-radius: 3px;
+}
   
+.remark-code{
+  border-radius: 10px;
+}
