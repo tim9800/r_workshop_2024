@@ -235,7 +235,7 @@ Objects
 
 * Belong to **classes**
 
-* Have content (in R, **values**)
+* Have content (in R, **values**) and structure
 
 * Have **names**<sup>1</sup>
 
@@ -244,5 +244,69 @@ Objects
 .footnote[[1] Not completely true. Hadley Wickham insists that names have objects<sup>[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)</sup>. To avoid this discussion, I will say that a name *refers to* or *references* an object.]
 
 ---
-## Kinds of objects
+## Making and calling objects
+
+To make an object, you must first come up with a valid name:
+
+* Starts with a letter [A-Za-z]
+* NOT starting with a number [0-9] or special character [._]
+
+```{r, eval = FALSE}
+my_object
+.bad_name
+1another_bad_name
+```
+
+You then bind a value to the name using the `<-` operator
+
+```{r}
+my_object <- 123
+```
+
+To retrieve the value, we **call** the object by typing its name
+
+```{r}
+my_object
+```
+
+
+---
+## Using objects
+
+We just saw that an object's **name** can be used to access the information inside the object it refers to
+* Like pronumerals in maths, $x = 123$
+
+```{r, eval = FALSE}
+my_object + 1
+sqrt(my_object)
+my_object + my_object
+```
+
+--
+
+What is the value of `my_object`?
+
+--
+
+```{r}
+my_object
+```
+
+---
+## Save your operations!
+> *Everything that exists in R is an object.*
+
+`my_object + 1` is not an object, because it has no name
+
+```{r}
+new_object <- my_object + 1
+new_object
+```
+
+Note that you can use the same name to store the result of `my_object + 1`. Try it!
+
+```{r}
+my_object <- my_object + 1
+my_object
+```
 
