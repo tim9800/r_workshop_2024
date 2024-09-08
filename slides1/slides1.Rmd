@@ -303,6 +303,8 @@ new_object <- my_object + 1
 new_object
 ```
 
+--
+
 Note that you can use the same name to store the result of `my_object + 1`. Try it!
 
 ```{r}
