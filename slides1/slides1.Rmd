@@ -66,13 +66,11 @@ name: colors
 
 2. The RStudio interface
 
-3. Objects and functions
+3. Objects
 
-4. Packages
+4. Working with external data
 
-5. Reading in files and the working directory
-
-6. Manipulating data using `tidyverse`
+5. Data manipulation with `tidyverse`
 
 ---
 class: inverse center middle
@@ -219,7 +217,7 @@ R can give you help on unfamiliar commands
 ---
 class: inverse center middle
 
-# Objects and functions
+# Objects
 
 ---
 ## What is an object?
@@ -235,7 +233,7 @@ Objects
 
 * Belong to **classes**
 
-* Have content (in R, **values**) and structure
+* Are **structured**
 
 * Have **names**<sup>1</sup>
 
@@ -321,3 +319,118 @@ my_object
 > *Everything that exists in R is an object.* <br>
 >
 > Objects belong to **classes**
+
+There are six *atomic* classes in R
+
+.pull-left[
+Here are the four common classes:
+<br>
+<br>
+* `numeric`: the real numbers
+
+* `integer`: the integers
+
+* `character`: 'textual' information
+
+* `logical`: `TRUE`, `FALSE` and `NA`
+]
+
+.pull-right[
+And here's how to make objects of each class:
+
+```{r}
+num <- 123
+
+int <- 123L
+
+char <- "123" # Use double quotes to create character objects
+
+logi <- TRUE
+```
+]
+---
+## `class()`
+
+The `class()` function returns the class of the object you use it on
+
+```{r}
+class(num)
+class(int)
+class(char)
+class(logi)
+```
+
+
+---
+## Vectors
+> *Everything that exists in R is an object.* <br>
+>
+> Objects are **structured**
+
+Vectors are:
+* A kind of data structure
+* A **homogenous** collection of elements (i.e. all the elements belong to the
+same class)
+
+--
+
+Create vectors using the function `c()`, short for "combines", on the elements
+you want to put into the vector
+
+```{r}
+survey_age <- c(15, 25, 27, 18) # A numeric vector
+
+survey_gender <- c("Male", "Female", "Female", "Male") # A character vector
+```
+
+---
+## Factors
+
+Factors are a kind of vector well-suited to storing **categorical data**.
+
+Create factors by using `factor()` on character vectors:
+
+```{r}
+gender_factor <- factor(survey_gender)
+gender_factor
+```
+
+
+---
+class: inverse center middle
+
+# Working with external data
+
+---
+## Put everything in one place
+> Clean up your room! <br>
+> *Jordan B. Peterson*
+
+Having all your files, R scripts, and spreadsheets in one directory (folder)
+makes it easy to work with external data.
+
+Exercise:
+
+1. Minimise RStudio and find a place, on your computer's file system, to save the contents
+of this workshop
+
+2. Make a folder there
+
+3. Go back to RStudio, and `File > Save As.. > [Location you chose]`
+
+---
+## The working directory
+
+---
+## Saving and loading R objects
+
+---
+## Reading in `.csv` files
+
+
+---
+class: inverse middle center
+
+# Data manipulation with `tidyverse`
+
+---
