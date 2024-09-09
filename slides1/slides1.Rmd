@@ -257,13 +257,13 @@ my_object
 1another_bad_name
 ```
 
-You then bind a value to the name using the `<-` operator
+Next, bind an object to the name using the `<-` operator
 
 ```{r}
 my_object <- 123
 ```
 
-To retrieve the value, we **call** the object by typing its name
+To retrieve the object, we **call** the object by typing its name
 
 ```{r}
 my_object
@@ -294,9 +294,13 @@ my_object
 
 ---
 ## Save your operations!
-> *Everything that exists in R is an object.*
+> *Everything that exists in R is an object.* <br>
+>
+> Objects have **names**
 
-`my_object + 1` is not an object, because it has no name
+`my_object + 1` is not an object, because we haven't assigned it a name
+
+--
 
 ```{r}
 new_object <- my_object + 1
@@ -312,3 +316,8 @@ my_object <- my_object + 1
 my_object
 ```
 
+---
+## Object classes
+> *Everything that exists in R is an object.* <br>
+>
+> Objects belong to **classes**
