@@ -66,13 +66,11 @@ name: colors
 
 2. The RStudio interface
 
-3. Objects and functions
+3. Objects
 
-4. Packages
+4. Reading in files and the working directory
 
-5. Reading in files and the working directory
-
-6. Manipulating data using `tidyverse`
+5. Manipulating data using `tidyverse`
 
 ---
 class: inverse center middle
@@ -219,7 +217,7 @@ R can give you help on unfamiliar commands
 ---
 class: inverse center middle
 
-# Objects and functions
+# Objects
 
 ---
 ## What is an object?
@@ -235,7 +233,7 @@ Objects
 
 * Belong to **classes**
 
-* Have content (in R, **values**) and structure
+* Are **structured**
 
 * Have **names**<sup>1</sup>
 
@@ -321,3 +319,57 @@ my_object
 > *Everything that exists in R is an object.* <br>
 >
 > Objects belong to **classes**
+
+There are six *atomic* classes in R
+
+Here are the four common ones:
+|`numeric`: the real numbers|
+```{r}
+num <- 123
+```
+|
+
+|`integer`: the integers|
+```{r}
+int <- 123L
+```
+|
+* `character`: 'textual' information
+```{r}
+char <- "123"
+```
+
+* `logical`: `TRUE`, `FALSE` and `NA`
+```{r}
+logi <- TRUE
+```
+
+
+---
+## Vectors
+> *Everything that exists in R is an object.* <br>
+>
+> Objects are **structured**
+
+Vectors are:
+* A kind of data structure
+* A **homogenous** collection of elements (i.e. all the elements belong to the
+same class)
+
+--
+
+Vectors are made using the function `c()`, which is short for "combines"
+
+```{r}
+ages <- c(15, 25, 27, 18) # A numeric vector
+
+survey_results <- c("Yes", "No", "No", "Maybe") # A character vector
+```
+
+
+---
+class: inverse center middle
+
+# Reading in files and the working directory
+
+---
