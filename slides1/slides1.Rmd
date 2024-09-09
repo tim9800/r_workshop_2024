@@ -68,9 +68,15 @@ name: colors
 
 3. Objects
 
+<<<<<<< HEAD
 4. Reading in files and the working directory
 
 5. Manipulating data using `tidyverse`
+=======
+4. Working with external data
+
+5. Data manipulation with `tidyverse`
+>>>>>>> 792319f5913ea98225663891da7314e12292d087
 
 ---
 class: inverse center middle
@@ -322,6 +328,7 @@ my_object
 
 There are six *atomic* classes in R
 
+<<<<<<< HEAD
 Here are the four common ones:
 |`numeric`: the real numbers|
 ```{r}
@@ -343,6 +350,45 @@ char <- "123"
 ```{r}
 logi <- TRUE
 ```
+=======
+.pull-left[
+Here are the four common classes:
+<br>
+<br>
+* `numeric`: the real numbers
+
+* `integer`: the integers
+
+* `character`: 'textual' information
+
+* `logical`: `TRUE`, `FALSE` and `NA`
+]
+
+.pull-right[
+And here's how to make objects of each class:
+
+```{r}
+num <- 123
+
+int <- 123L
+
+char <- "123" # Use double quotes to create character objects
+
+logi <- TRUE
+```
+]
+---
+## `class()`
+
+The `class()` function returns the class of the object you use it on
+
+```{r}
+class(num)
+class(int)
+class(char)
+class(logi)
+```
+>>>>>>> 792319f5913ea98225663891da7314e12292d087
 
 
 ---
@@ -358,18 +404,76 @@ same class)
 
 --
 
+<<<<<<< HEAD
 Vectors are made using the function `c()`, which is short for "combines"
 
 ```{r}
 ages <- c(15, 25, 27, 18) # A numeric vector
 
 survey_results <- c("Yes", "No", "No", "Maybe") # A character vector
+=======
+Create vectors using the function `c()`, short for "combines", on the elements
+you want to put into the vector
+
+```{r}
+survey_age <- c(15, 25, 27, 18) # A numeric vector
+
+survey_gender <- c("Male", "Female", "Female", "Male") # A character vector
+```
+
+---
+## Factors
+
+Factors are a kind of vector well-suited to storing **categorical data**.
+
+Create factors by using `factor()` on character vectors:
+
+```{r}
+gender_factor <- factor(survey_gender)
+gender_factor
+>>>>>>> 792319f5913ea98225663891da7314e12292d087
 ```
 
 
 ---
 class: inverse center middle
 
+<<<<<<< HEAD
 # Reading in files and the working directory
+=======
+# Working with external data
+
+---
+## Put everything in one place
+> Clean up your room! <br>
+> *Jordan B. Peterson*
+
+Having all your files, R scripts, and spreadsheets in one directory (folder)
+makes it easy to work with external data.
+
+Exercise:
+
+1. Minimise RStudio and find a place, on your computer's file system, to save the contents
+of this workshop
+
+2. Make a folder there
+
+3. Go back to RStudio, and `File > Save As.. > [Location you chose]`
+
+---
+## The working directory
+
+---
+## Saving and loading R objects
+
+---
+## Reading in `.csv` files
+
+
+---
+class: inverse middle center
+
+# Data manipulation with `tidyverse`
+>>>>>>> 792319f5913ea98225663891da7314e12292d087
 
 ---
