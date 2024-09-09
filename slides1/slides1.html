@@ -52,13 +52,11 @@ name: colors
 
 2. The RStudio interface
 
-3. Objects and functions
+3. Objects
 
-4. Packages
+4. Reading in files and the working directory
 
-5. Reading in files and the working directory
-
-6. Manipulating data using `tidyverse`
+5. Manipulating data using `tidyverse`
 
 ---
 class: inverse center middle
@@ -209,7 +207,7 @@ R can give you help on unfamiliar commands
 ---
 class: inverse center middle
 
-# Objects and functions
+# Objects
 
 ---
 ## What is an object?
@@ -225,7 +223,7 @@ Objects
 
 * Belong to **classes**
 
-* Have content (in R, **values**) and structure
+* Are **structured**
 
 * Have **names**&lt;sup&gt;1&lt;/sup&gt;
 
@@ -334,6 +332,65 @@ my_object
 &gt; *Everything that exists in R is an object.* &lt;br&gt;
 &gt;
 &gt; Objects belong to **classes**
+
+There are six *atomic* classes in R
+
+Here are the four common ones:
+|`numeric`: the real numbers|
+
+``` r
+num &lt;- 123
+```
+|
+
+|`integer`: the integers|
+
+``` r
+int &lt;- 123L
+```
+|
+* `character`: 'textual' information
+
+``` r
+char &lt;- "123"
+```
+
+* `logical`: `TRUE`, `FALSE` and `NA`
+
+``` r
+logi &lt;- TRUE
+```
+
+
+---
+## Vectors
+&gt; *Everything that exists in R is an object.* &lt;br&gt;
+&gt;
+&gt; Objects are **structured**
+
+Vectors are:
+* A kind of data structure
+* A **homogenous** collection of elements (i.e. all the elements belong to the
+same class)
+
+--
+
+Vectors are made using the function `c()`, which is short for "combines"
+
+
+``` r
+ages &lt;- c(15, 25, 27, 18) # A numeric vector
+
+survey_results &lt;- c("Yes", "No", "No", "Maybe") # A character vector
+```
+
+
+---
+class: inverse center middle
+
+# Reading in files and the working directory
+
+---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
