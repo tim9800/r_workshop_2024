@@ -68,15 +68,9 @@ name: colors
 
 3. Objects
 
-<<<<<<< HEAD
-4. Reading in files and the working directory
-
-5. Manipulating data using `tidyverse`
-=======
 4. Working with external data
 
 5. Data manipulation with `tidyverse`
->>>>>>> 792319f5913ea98225663891da7314e12292d087
 
 ---
 class: inverse center middle
@@ -328,29 +322,6 @@ my_object
 
 There are six *atomic* classes in R
 
-<<<<<<< HEAD
-Here are the four common ones:
-|`numeric`: the real numbers|
-```{r}
-num <- 123
-```
-|
-
-|`integer`: the integers|
-```{r}
-int <- 123L
-```
-|
-* `character`: 'textual' information
-```{r}
-char <- "123"
-```
-
-* `logical`: `TRUE`, `FALSE` and `NA`
-```{r}
-logi <- TRUE
-```
-=======
 .pull-left[
 Here are the four common classes:
 <br>
@@ -388,7 +359,6 @@ class(int)
 class(char)
 class(logi)
 ```
->>>>>>> 792319f5913ea98225663891da7314e12292d087
 
 
 ---
@@ -404,14 +374,6 @@ same class)
 
 --
 
-<<<<<<< HEAD
-Vectors are made using the function `c()`, which is short for "combines"
-
-```{r}
-ages <- c(15, 25, 27, 18) # A numeric vector
-
-survey_results <- c("Yes", "No", "No", "Maybe") # A character vector
-=======
 Create vectors using the function `c()`, short for "combines", on the elements
 you want to put into the vector
 
@@ -431,16 +393,12 @@ Create factors by using `factor()` on character vectors:
 ```{r}
 gender_factor <- factor(survey_gender)
 gender_factor
->>>>>>> 792319f5913ea98225663891da7314e12292d087
 ```
 
 
 ---
 class: inverse center middle
 
-<<<<<<< HEAD
-# Reading in files and the working directory
-=======
 # Working with external data
 
 ---
@@ -474,6 +432,5 @@ of this workshop
 class: inverse middle center
 
 # Data manipulation with `tidyverse`
->>>>>>> 792319f5913ea98225663891da7314e12292d087
 
 ---
