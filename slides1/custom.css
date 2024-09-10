@@ -47,8 +47,17 @@
 }
 /* Embedded slide formatting */
 
-.embed-right {
+.embed-right-small {
   float: right;
   margin-left: 15px;
   margin-bottom: 10px;
+  height: 162px;
+  width: auto;
+}
+
+.embed-right-icon {
+  float: right;
+  height: 100px;
+  width: auto;
+  margin-left: 15px;
 }
