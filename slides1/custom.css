@@ -61,3 +61,8 @@
   width: auto;
   margin-left: 15px;
 }
+
+.tidyverse-title {
+  background-image: url(https://tim9800.github.io/r_workshop_2024/img/tidyverse_logo.png);
+  background-position: center bottom 140px;
+}
