@@ -17,7 +17,7 @@ layout: default
 ## Workshop slides
 
 The link to the presentation slides will appear here when they are ready
-*   [//] # (https://tim9800.github.io/r_workshop_2024/slides1/slides1.html)
+*   [//]: # (https://tim9800.github.io/r_workshop_2024/slides1/slides1.html)
 
 ## Furthe readings and resources
 
