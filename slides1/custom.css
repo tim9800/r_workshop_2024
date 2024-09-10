@@ -34,6 +34,7 @@
     margin: 0px;
   }
 
+/* Inline code and block code formatting */
 .remark-inline-code{
   background: #E0E0E0;
   padding: 2px;
@@ -43,4 +44,11 @@
   
 .remark-code{
   border-radius: 10px;
+}
+/* Embedded slide formatting */
+
+.embed-right {
+  float: right;
+  margin-left: 15px;
+  margin-bottom: 10px;
 }
