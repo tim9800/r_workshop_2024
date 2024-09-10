@@ -29,6 +29,7 @@ knitr::opts_chunk$set(
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
+library(RefManageR)
 blue <- "#1381B0"
 orange <- "#FF961C"
 white <- "#FFFFFF"
@@ -406,26 +407,68 @@ class: inverse center middle
 > Clean up your room! <br>
 > *Jordan B. Peterson*
 
-Having all your files, R scripts, and spreadsheets in one directory (folder)
+Having all your files, R scripts, and spreadsheets in one **directory** (folder)
 makes it easy to work with external data.
 
 Exercise:
 
-1. Minimise RStudio and find a place, on your computer's file system, to save the contents
-of this workshop
+1. Minimise RStudio and find a place on your computer to save the script you've
+been working on
 
 2. Make a folder there
 
 3. Go back to RStudio, and `File > Save As.. > [Location you chose]`
 
+4. Save the [workshop dataset]() into the same folder
+
 ---
 ## The working directory
 
----
-## Saving and loading R objects
+The **working directory** is the folder where R saves and looks for files.
+
+What is your current working directory?
+
+```{r, eval = FALSE}
+getwd() # Probably not where you want
+```
+
+How do we set our working directory to the folder we want?
+<br>
+
+--
+
+&emsp; Option 1: `Session > Set Working Directory > Choose Directory ...`
+
+--
+
+&emsp; Option 2: Close R Studio, and double click on the .R Script you just saved,
+in the folder you saved it in
+
+--
+
+&emsp; Option 3 (slow): 
+
+```{r, eval = FALSE}
+setwd("C:/Location/to/your/file.R")
+```
 
 ---
 ## Reading in `.csv` files
+
+Data about people (surveys, clinical data) is often stored in `.csv` files
+
+> *Everything that exists in R is an object*
+
+`read.csv()` is a function which converts a `.csv` file into an R object - specifically,
+a **data frame**.
+
+```{r}
+# survey_df <- read.csv("workshop_data.csv")
+```
+
+
+---
+## Saving and loading R objects
 
 
 ---
@@ -434,3 +477,13 @@ class: inverse middle center
 # Data manipulation with `tidyverse`
 
 ---
+## What is tidyverse?
+
+The tidyverse is a set of **packages** for R that "share an underlying design philosophy, grammar, and data structures" of tidy data.<sup>[3](https://www.tidyverse.org/)</sup>
+
+
+<img src="https://tim9800.github.io/r_workshop_2024/img/hadley.jpg" class = "embed-right">
+* Hadley Wickham <sup>[4](https://en.wikipedia.org/wiki/Hadley_Wickham)</sup>
+
+
+
