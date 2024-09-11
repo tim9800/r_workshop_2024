@@ -84,19 +84,17 @@ name: what R
 .col-flex-container[
   .column[
   ### Statistical
-  ANOVA
+  ANOVA, regression, t.tests
   
-  Regression
+  Plots, graphs
   
-  t testing
-  
-  Correlations
+  Data tables
 ]
   
   .column[
   ### Programming
   
-  Talking to the computer
+  To give instructions to a computer
 ]
 
   .column[
@@ -119,6 +117,8 @@ name: why R
 * Free
 
 * Open-source
+
+* Huge library of **packages** that extend R's functionality
 
 * Huge community of experts
 
@@ -397,6 +397,42 @@ gender_factor
 
 
 ---
+## Functions
+> *Everything that happens in R is a function call*
+
+Functions
+
+* Are objects, meaning they have **names**
+
+* Are bundles of instructions that take an input and return an output
+
+---
+
+## Structure of a function
+
+The inputs we give to a function are called **arguments**. Arguments change
+the behaviour of the function, depending on the argument's value.
+
+What kind of arguments does a function expect? Use `?` to find out
+
+```{r}
+?sqrt
+
+```
+
+Arguments can be named
+```{r}
+sqrt(x = 4)
+```
+
+or positional
+```{r}
+sqrt(4)
+```
+
+
+---
+
 class: inverse center middle
 
 # Working with external data
@@ -490,6 +526,46 @@ The tidyverse is a set of **packages** for R that "share an underlying design ph
 
     * R for Data Science
     * Advanced R
+    
+---
+## Installing tidyverse
+
+As tidyverse is an external package, we must install it before we can use it.
+
+To install packages, we use the function `install.packages()` on tidyverse (quoted)
+
+```{r, eval = FALSE}
+install.packages("tidyverse") # Try autocomplete!
+```
+
+After installing a package, we must attach it to R to use its features. This is
+by calling the `library()` function on tidyverse (no quotes)
+
+```{r}
+library(tidyverse) # Autocomplete to the rescue
+```
+
+**Notes**
+* `install.packages("package")` is used once
+* `library(package)` is used *every time you open R*
+* Repeat this process for each package you want to use
+
+---
+## Maybe a slide on tidyverse vs base R
+
+---
+## `%>%`: pipes
+
+---
+## `select()`: column-wise subsetting
+
+---
+## `filter()`: row-wise subsetting
+
+---
+## `mutate()`: make new columns
+
+---
 
 
 
