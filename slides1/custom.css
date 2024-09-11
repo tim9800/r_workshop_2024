@@ -24,7 +24,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     overflow-wrap: break-word;
     padding-left: 1em;
     padding-right: 1em;
