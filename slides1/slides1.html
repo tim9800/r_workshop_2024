@@ -464,10 +464,10 @@ What kind of arguments does a function expect? Use `?` to find out
 
 
 ``` r
-?sqrt
+?sum
 ```
 
-Arguments can be named
+Arguments can be *named*
 
 ``` r
 sqrt(x = 4)
@@ -477,7 +477,7 @@ sqrt(x = 4)
 ## [1] 2
 ```
 
-or positional
+or *positional*
 
 ``` r
 sqrt(4)
@@ -579,13 +579,21 @@ class: inverse middle center tidyverse-title
 
 The tidyverse is a set of **packages** for R that "share an underlying design philosophy, grammar, and data structures" of tidy data.&lt;sup&gt;[3](https://www.tidyverse.org/)&lt;/sup&gt;
 
+* **tidy**: one row per observation, one column per variable
+
+  * 'Long data' (preferred) vs. 'wide data'
+
+* Replaces a lot of clunky base R syntax with **verbs**
+
+--
 
 &lt;img src="https://tim9800.github.io/r_workshop_2024/img/hadley.jpg" class = "embed-right-small"&gt;
 
 * Developed in principal by Hadley Wickham &lt;sup&gt;[4](https://en.wikipedia.org/wiki/Hadley_Wickham)&lt;/sup&gt;
 
-    * R for Data Science
-    * Advanced R
+    * R for Data Science &lt;sup&gt;[5](https://r4ds.hadley.nz/)&lt;/sup&gt;
+    
+    * Advanced R &lt;sup&gt;[6](https://adv-r.hadley.nz/)&lt;/sup&gt;
     
 ---
 ## Installing tidyverse
@@ -612,8 +620,6 @@ library(tidyverse) # Autocomplete to the rescue
 * `library(package)` is used *every time you open R*
 * Repeat this process for each package you want to use
 
----
-## Maybe a slide on tidyverse vs base R
 
 ---
 ## `%&gt;%`: pipes
@@ -625,10 +631,17 @@ library(tidyverse) # Autocomplete to the rescue
 ## `filter()`: row-wise subsetting
 
 ---
-## `mutate()`: make new columns
+## Logical statements
+
+There are many kinds of conditions we can use to filter the rows of a dataset
+
+* 
 
 ---
+## `mutate()`: make new variables
 
+---
+## `summarise()`: data summaries
 
 
     </textarea>
