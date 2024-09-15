@@ -30,7 +30,7 @@ Mac users should also install XQuartz, a program which is needed for drawing plo
 
 ## Installing R Studio
 
-1. Go to the install page for RStudio
+1. Go to the [install page](https://posit.co/download/rstudio-desktop/) for RStudio
 
 2. Under **2: Install RStudio**, click the download button. The button should say "Download RStudio for XYZ" (where XYZ is your operating system)
 
