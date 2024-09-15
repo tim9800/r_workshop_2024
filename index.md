@@ -14,9 +14,11 @@ layout: default
 
 	* STEP 3 IS OPTIONAL. We will go through this step in the workshop as well, but it will be handy if you can do this step before coming
 
-## Workshop slides
+## Workshop materials
 
 The link to the presentation slides will appear here when they are ready
+
+* [Workshop dataset: sleep and depression in the Neurobiology cohort (synthetic data)](https://tim9800.github.io/r_workshop_2024/data/neurobio_synthetic.csv)
 
 ## Further readings and resources
 

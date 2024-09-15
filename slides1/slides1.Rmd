@@ -454,7 +454,7 @@ been working on
 
 3. Go back to RStudio, and `File > Save As.. > [Location you chose]`
 
-4. Save the [workshop dataset]() into the same folder
+4. Download and save the [workshop dataset](https://tim9800.github.io/r_workshop_2024/data/neurobio_synthetic.csv) into the folder you just made
 
 ---
 ## The working directory
