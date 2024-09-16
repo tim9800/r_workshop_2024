@@ -3,7 +3,7 @@ layout: default
 ---
 
 # Installing `tidyverse`
-`tidyverse` is a collection of many different packages, authored in principal by the prolific Hadley Wickham. We will be using these packages extensively in this workshop, so it is important that `tidyverse` is installed on your machine.
+`tidyverse` is an R package that we will use during the workshop. A package is an extension of R that is not part of R itself, so it needs to be downloaded in addition to R and RStudio.
 
 1. Make sure you have completed [Installing R and RStudio](https://tim9800.github.io/r_workshop_2024/installation.html) and [Installing tools for compiling packages](https://tim9800.github.io/r_workshop_2024/compilation.html).
 
