@@ -6,7 +6,9 @@ layout: default
 You will need to install both R and RStudio to follow this workshop. The process is straightforward
 and essentially the same for both Mac and Windows.
 
-## Installing R
+{% tabs install %}
+
+{% tab install R %}
 
 1. Go to the [install page](https://cran.rstudio.com/) for R
 
@@ -16,7 +18,7 @@ and essentially the same for both Mac and Windows.
 - If prompted, give administrator privileges to the installer 
 - Leaving all settings on their defaults is fine
 
-
+<br>
 ### Extra steps for Mac Users
 
 Mac users should also install XQuartz, a program which is needed for drawing plots on MacOS
@@ -27,8 +29,9 @@ Mac users should also install XQuartz, a program which is needed for drawing plo
 
 3. After downloading is finished, run the installer and follow the on-screen instructions
 
+{% endtab %}
 
-## Installing R Studio
+{% tab install RStudio %}
 
 1. Go to the [install page](https://posit.co/download/rstudio-desktop/) for RStudio
 
@@ -40,7 +43,11 @@ Mac users should also install XQuartz, a program which is needed for drawing plo
 
 4. Open RStudio and verify that it works
 
-
+<br>
 You have followed these instructions properly if the **bottom left** of your RStudio window looks similar to this:
 
 ![verify install](https://raw.githubusercontent.com/tim9800/r_workshop_2024/master/img/install.png)
+
+{% endtab %}
+
+{% endtabs %}
