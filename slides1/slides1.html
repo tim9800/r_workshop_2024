@@ -5,6 +5,10 @@
     <meta charset="utf-8" />
     <meta name="author" content="Timothy Wong" />
     <script src="slides1_files/header-attrs/header-attrs.js"></script>
+    <script src="slides1_files/clipboard/clipboard.min.js"></script>
+    <link href="slides1_files/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="slides1_files/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
@@ -26,6 +30,8 @@ class: center, middle, inverse, title-slide
 ]
 
 ---
+
+
 
 
 
@@ -56,7 +62,7 @@ name: colors
 
 4. Working with external data
 
-5. Data manipulation with `tidyverse`
+5. Data wrangling with `tidyverse`
 
 ---
 class: inverse center middle
@@ -70,11 +76,12 @@ name: what R
 .col-flex-container[
   .column[
   ### Statistical
-  ANOVA, regression, t.tests
+  ANOVA, regression, t.tests,\n
+  descriptives, summaries
+  
+  Data wrangling
   
   Plots, graphs
-  
-  Data tables
 ]
   
   .column[
@@ -137,14 +144,11 @@ name: rstudio info
 
 ## Navigating RStudio
 
-RStudio is an **integrated development environment** for R. It is separate to R and makes life easier than just working with R.
+RStudio is an **integrated development environment** for R. It is separate to R and makes life easier than working with 'just R'.
 
 ---
-![rgui](https://tim9800.github.io/r_workshop_2024/img/rgui.png)
+![rterm](https://tim9800.github.io/r_workshop_2024/img/rterm.png)
 ---
-![rcmd](https://tim9800.github.io/r_workshop_2024/img/rcmd.png)
----
-
 ![rstudio](https://tim9800.github.io/r_workshop_2024/img/rstudio.png)
 ---
 template: rstudio info
@@ -225,11 +229,11 @@ Objects
 
 * Are **structured**
 
-* Have **names**&lt;sup&gt;1&lt;/sup&gt;
+* Have **names**&lt;sup&gt;*&lt;/sup&gt;
 
 --
 
-.footnote[[1] Not completely true. Hadley Wickham insists that names have objects&lt;sup&gt;[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)&lt;/sup&gt;. To avoid this discussion, I will say that a name *refers to* or *references* an object.]
+.footnote[\* Not completely true. Hadley Wickham insists that names have objects&lt;sup&gt;[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)&lt;/sup&gt;. To avoid this discussion, whenever I say an object has a name, this means that the name *refers to* or *references* the object.]
 
 ---
 ## Making and calling objects
@@ -299,7 +303,7 @@ my_object
 &gt;
 &gt; Objects have **names**
 
-`my_object + 1` is not an object, because we haven't assigned it a name
+`my_object + 1` is not an object, because we haven't bound it to a name
 
 --
 
@@ -449,43 +453,108 @@ gender_factor
 
 Functions
 
-* Are objects, meaning they have **names**
+* Are objects, so they are referenced by **names**
 
-* Are bundles of instructions that take an input and return an output
+* Are bundles of instructions that take an input and return some useful output
+
+Function calls are indicated by sets of open and closed brackets
+
+* `c()`
+
+* `factor()`
+
 
 ---
 
 ## Structure of a function
 
-The inputs we give to a function are called **arguments**. Arguments change
-the behaviour of the function, depending on the argument's value.
+The inputs we give to a function are called **arguments**. Arguments:
 
-What kind of arguments does a function expect? Use `?` to find out
+* live inside the brackets of a function call
+
+* change the behaviour of the function, depending on the argument's value.
+&lt;br&gt;&lt;br&gt;
+
+What kind of arguments does a function expect?
 
 
 ``` r
-?sum
+?sqrt # This works with or without the brackets
 ```
 
-Arguments can be *named*
+Because `sqrt` only takes one argument, we can call it in two ways:
+
 
 ``` r
-sqrt(x = 4)
+sqrt(x = 4) # Named argument
+sqrt(4)     # Positional argument
+```
+
+---
+## Functions with multiple arguments
+
+When a function has multiple arguments, it is best to use named arguments unless
+the argument is the first one
+
+
+``` r
+num_data &lt;- c(3, 3, 3, NA)
+mean(num_data, na.rm = T)
+```
+
+```
+## [1] 3
+```
+
+--
+
+Many function arguments have defaults, if you don't tell the function what you want
+
+
+``` r
+mean(num_data)
+```
+
+```
+## [1] NA
+```
+
+--
+
+Which arguments have defaults? And what are they?
+
+* `?` is your best friend
+
+
+---
+## Save your function calls!
+&gt; *Everything that exists in R is an object.* &lt;br&gt;
+&gt;
+&gt; Objects have **names**
+
+The result of `sqrt(4)` isn't an object until we give it a name!
+
+
+``` r
+sqrt_of_4 &lt;- sqrt(4)
+sqrt_of_4
 ```
 
 ```
 ## [1] 2
 ```
 
-or *positional*
 
 ``` r
-sqrt(4)
+mean_of_three_3s &lt;- mean(c(3, 3, 3, NA), na.rm = T)
+mean_of_three_3s
 ```
 
 ```
-## [1] 2
+## [1] 3
 ```
+
+
 
 
 ---
@@ -496,8 +565,6 @@ class: inverse center middle
 
 ---
 ## Put everything in one place
-&gt; Clean up your room! &lt;br&gt;
-&gt; *Jordan B. Peterson*
 
 Having all your files, R scripts, and spreadsheets in one **directory** (folder)
 makes it easy to work with external data.
@@ -511,7 +578,7 @@ been working on
 
 3. Go back to RStudio, and `File &gt; Save As.. &gt; [Location you chose]`
 
-4. Save the [workshop dataset]() into the same folder
+4. Download the [workshop dataset](https://tim9800.github.io/r_workshop_2024/data/neurobio_synthetic.csv) and **put it into the folder you just made**
 
 ---
 ## The working directory
@@ -547,29 +614,66 @@ setwd("C:/Location/to/your/file.R")
 ```
 
 ---
-## Reading in `.csv` files
+## Reading in .csv files
 
-Data about people (surveys, clinical data) is often stored in `.csv` files
 
-&gt; *Everything that exists in R is an object*
 
-`read.csv()` is a function which converts a `.csv` file into an R object - specifically,
-a **data frame**.
+
+Let's read in (convert to an R object) the dataset we just downloaded and assign
+it to the name `df`:
 
 
 ``` r
-# survey_df &lt;- read.csv("workshop_data.csv")
+df &lt;- read.csv("neurobio_synthetic.csv")
 ```
+
+What now? Here's a list of short **base R** functions I like to use to glimpse at
+my data
+
+* `View(df)`
+
+* `names(df)`
+
+* `str(df)`
+
+* `df$...`
+
+* `table(df$...)`
+
+---
+## Writing to .csv files
+
+While `read.csv` converts a .csv file into a dataframe for you to work on, `write.csv` converts the dataframe back into a .csv file:
+
+
+``` r
+write.csv(df,
+          file = "neurobio_synthetic_updated.csv")
+```
+
 
 
 ---
 ## Saving and loading R objects
 
+Generally speaking, you won't need to save R objects. The contents of your script should be sufficient to reproduce the objects you need.
+
+By default, R Studio will ask if you want to save your Environment (with all your R objects) when you exit
+
+![save workspace](https://tim9800.github.io/r_workshop_2024/img/save_workspace.png)
+Alternatively, you can save a single R object with
+
+
+``` r
+saveRDS(df,
+        file = "neurobio_synthetic_updated.RDS")
+```
+
 
 ---
 class: inverse middle center tidyverse-title
 
-# Data manipulation with
+# Data wrangling with
 
 ---
 &lt;img src="https://tim9800.github.io/r_workshop_2024/img/tidyverse_logo.png" class="embed-right-icon"&gt;
@@ -607,8 +711,7 @@ To install packages, we use the function `install.packages()` on tidyverse (quot
 install.packages("tidyverse") # Try autocomplete!
 ```
 
-After installing a package, we must attach it to R to use its features. This is
-by calling the `library()` function on tidyverse (no quotes)
+After installing a package, we must attach it to R to use its features. Let's do this by calling the `library()` function on tidyverse (no quotes)
 
 
 ``` r
@@ -622,13 +725,140 @@ library(tidyverse) # Autocomplete to the rescue
 
 
 ---
+name: select
+
+## `select()`: column-wise subsetting
+
+This function allows us to **select** a subset of variables in our data.
+
+--
+
+template: select
+
+Let's remind ourselves of the variables we're working with
+
+
+``` r
+names(df)
+```
+
+--
+
+**Example 1**: Selecting 1 variable
+
+
+``` r
+df_select_1 &lt;- select(df, age)
+df_select_1
+```
+
+```
+##   age
+## 1  21
+## 2  23
+## 3  25
+## 4  30
+## 5  20
+##  [ reached 'max' / getOption("max.print") -- omitted 265 rows ]
+```
+
+---
+template: select
+
+**Example 2**: Select multiple variables
+
+
+``` r
+df_select_2 &lt;- select(df, age, sex_at_birth.factor, scid_mdd_current)
+df_select_2
+```
+
+```
+##   age sex_at_birth.factor scid_mdd_current
+## 1  21              Female               No
+## 2  23              Female               No
+## 3  25              Female               No
+## 4  30              Female               No
+## 5  20              Female               No
+##  [ reached 'max' / getOption("max.print") -- omitted 265 rows ]
+```
+
+---
+template: select
+
+**Example 3**: Select consecutive variables using the `:` operator
+
+
+``` r
+df_select_3 &lt;- select(df, age:sofas_score)
+df_select_3
+```
+
+```
+##   age sex_at_birth.factor clinical_stage.factor sofas_score
+## 1  21              Female                     2          51
+## 2  23              Female                    1b          85
+## 3  25              Female                    1b          70
+## 4  30              Female                     2          68
+## 5  20              Female                    1b          75
+##  [ reached 'max' / getOption("max.print") -- omitted 265 rows ]
+```
+
+
+---
+template: select
+
+**Example 4**: Select variables which start with "scid"
+
+
+``` r
+df_select_4 &lt;- select(df, starts_with("scid"))
+df_select_4
+```
+
+```
+##   scid_completed.factor scid_mdd_current scid_mdd_lifetime
+## 1                   Yes               No               Yes
+## 2                   Yes               No               Yes
+## 3                   Yes               No               Yes
+## 4                   Yes               No                No
+## 5                   Yes               No                No
+##  [ reached 'max' / getOption("max.print") -- omitted 265 rows ]
+```
+
+---
+template: select
+
+There are many more **tidy selection helpers**. Find out more about them using
+`?select`
+
+* `ends_with("...")` - select variables ending in "..."
+
+* `c()` - combine multiple helpers, e.g. `c(age, sex_at_birth.factor, ends_with(".factor")`
+
+* `where(is.numeric)` - select only numeric variables
+
+---
 ## `%&gt;%`: pipes
 
 ---
-## `select()`: column-wise subsetting
+name:filter
 
----
 ## `filter()`: row-wise subsetting
+
+This function allows us to **filter** *in* observations using logical propositions.
+
+--
+
+**Example 1**: Filter in the adults
+
+
+``` r
+df_filter_1 &lt;- df %&gt;%
+  filter(age &gt;= 18)
+```
+
+
 
 ---
 ## Logical statements
@@ -641,7 +871,25 @@ There are many kinds of conditions we can use to filter the rows of a dataset
 ## `mutate()`: make new variables
 
 ---
+## `mutate()` + `case_when()`
+
+---
 ## `summarise()`: data summaries
+
+---
+## Resources
+
+---
+## Acknowledgements
+
+* Charles Lanfear's [Introduction to R workshop](https://clanfear.github.io/Intro_R_Workshop/)
+
+* Nick Ho's [Introduction into R Workshop](https://sydney-informatics-hub.github.io/lessonbmc/)
+
+* YMH clinical studies team for enabling the Neurobiology follow-up study to
+happen (collecting participant follow-up data is a long and painful road)
+
+
 
 
     </textarea>
