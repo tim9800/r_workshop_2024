@@ -46,6 +46,10 @@ style_duo_accent(
 )
 ```
 
+```{r xaringanExtra-clipboard, include=FALSE, warning=FALSE}
+xaringanExtra::use_clipboard()
+```
+
 name: housekeeping
 
 ## Housekeeping
@@ -70,7 +74,7 @@ name: colors
 
 4. Working with external data
 
-5. Data manipulation with `tidyverse`
+5. Data wrangling with `tidyverse`
 
 ---
 class: inverse center middle
@@ -84,11 +88,12 @@ name: what R
 .col-flex-container[
   .column[
   ### Statistical
-  ANOVA, regression, t.tests
+  ANOVA, regression, t.tests,\n
+  descriptives, summaries
+  
+  Data wrangling
   
   Plots, graphs
-  
-  Data tables
 ]
   
   .column[
@@ -151,14 +156,11 @@ name: rstudio info
 
 ## Navigating RStudio
 
-RStudio is an **integrated development environment** for R. It is separate to R and makes life easier than just working with R.
+RStudio is an **integrated development environment** for R. It is separate to R and makes life easier than working with 'just R'.
 
 ---
-![rgui](https://tim9800.github.io/r_workshop_2024/img/rgui.png)
+![rterm](https://tim9800.github.io/r_workshop_2024/img/rterm.png)
 ---
-![rcmd](https://tim9800.github.io/r_workshop_2024/img/rcmd.png)
----
-
 ![rstudio](https://tim9800.github.io/r_workshop_2024/img/rstudio.png)
 ---
 template: rstudio info
@@ -235,11 +237,11 @@ Objects
 
 * Are **structured**
 
-* Have **names**<sup>1</sup>
+* Have **names**<sup>*</sup>
 
 --
 
-.footnote[[1] Not completely true. Hadley Wickham insists that names have objects<sup>[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)</sup>. To avoid this discussion, I will say that a name *refers to* or *references* an object.]
+.footnote[\* Not completely true. Hadley Wickham insists that names have objects<sup>[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)</sup>. To avoid this discussion, whenever I say an object has a name, this means that the name *refers to* or *references* the object.]
 
 ---
 ## Making and calling objects
@@ -296,7 +298,7 @@ my_object
 >
 > Objects have **names**
 
-`my_object + 1` is not an object, because we haven't assigned it a name
+`my_object + 1` is not an object, because we haven't bound it to a name
 
 --
 
@@ -402,33 +404,88 @@ gender_factor
 
 Functions
 
-* Are objects, meaning they have **names**
+* Are objects, so they are referenced by **names**
 
-* Are bundles of instructions that take an input and return an output
+* Are bundles of instructions that take an input and return some useful output
+
+Function calls are indicated by sets of open and closed brackets
+
+* `c()`
+
+* `factor()`
+
 
 ---
 
 ## Structure of a function
 
-The inputs we give to a function are called **arguments**. Arguments change
-the behaviour of the function, depending on the argument's value.
+The inputs we give to a function are called **arguments**. Arguments:
 
-What kind of arguments does a function expect? Use `?` to find out
+* live inside the brackets of a function call
+
+* change the behaviour of the function, depending on the argument's value.
+<br><br>
+
+What kind of arguments does a function expect?
 
 ```{r}
-?sum
+?sqrt # This works with or without the brackets
 
 ```
 
-Arguments can be *named*
-```{r}
-sqrt(x = 4)
+Because `sqrt` only takes one argument, we can call it in two ways:
+
+```{r, eval = FALSE}
+sqrt(x = 4) # Named argument
+sqrt(4)     # Positional argument
 ```
 
-or *positional*
+---
+## Functions with multiple arguments
+
+When a function has multiple arguments, it is best to use named arguments unless
+the argument is the first one
+
 ```{r}
-sqrt(4)
+num_data <- c(3, 3, 3, NA)
+mean(num_data, na.rm = T)
 ```
+
+--
+
+Many function arguments have defaults, if you don't tell the function what you want
+
+```{r}
+mean(num_data)
+```
+
+--
+
+Which arguments have defaults? And what are they?
+
+* `?` is your best friend
+
+
+---
+## Save your function calls!
+> *Everything that exists in R is an object.* <br>
+>
+> Objects have **names**
+
+The result of `sqrt(4)` isn't an object until we give it a name!
+
+```{r}
+sqrt_of_4 <- sqrt(4)
+sqrt_of_4
+```
+
+```{r}
+mean_of_three_3s <- mean(c(3, 3, 3, NA), na.rm = T)
+mean_of_three_3s
+
+```
+
+
 
 
 ---
@@ -439,8 +496,6 @@ class: inverse center middle
 
 ---
 ## Put everything in one place
-> Clean up your room! <br>
-> *Jordan B. Peterson*
 
 Having all your files, R scripts, and spreadsheets in one **directory** (folder)
 makes it easy to work with external data.
@@ -454,7 +509,7 @@ been working on
 
 3. Go back to RStudio, and `File > Save As.. > [Location you chose]`
 
-4. Download and save the [workshop dataset](https://tim9800.github.io/r_workshop_2024/data/neurobio_synthetic.csv) into the folder you just made
+4. Download the [workshop dataset](https://tim9800.github.io/r_workshop_2024/data/neurobio_synthetic.csv) and **put it into the folder you just made**
 
 ---
 ## The working directory
@@ -488,28 +543,65 @@ setwd("C:/Location/to/your/file.R")
 ```
 
 ---
-## Reading in `.csv` files
+## Reading in .csv files
 
-Data about people (surveys, clinical data) is often stored in `.csv` files
 
-> *Everything that exists in R is an object*
+```{r, eval = TRUE, echo = FALSE, results = "hide"}
+df <- read.csv("../data/neurobio_synthetic.csv")
+```
 
-`read.csv()` is a function which converts a `.csv` file into an R object - specifically,
-a **data frame**.
+Let's read in (convert to an R object) the dataset we just downloaded and assign
+it to the name `df`:
+
+```{r, eval = FALSE}
+df <- read.csv("neurobio_synthetic.csv")
+```
+
+What now? Here's a list of short **base R** functions I like to use to glimpse at
+my data
+
+* `View(df)`
+
+* `names(df)`
+
+* `str(df)`
+
+* `df$...`
+
+* `table(df$...)`
+
+---
+## Writing to .csv files
+
+While `read.csv` converts a .csv file into a dataframe for you to work on, `write.csv` converts the dataframe back into a .csv file:
 
 ```{r}
-# survey_df <- read.csv("workshop_data.csv")
+write.csv(df,
+          file = "neurobio_synthetic_updated.csv")
 ```
+
 
 
 ---
 ## Saving and loading R objects
 
+Generally speaking, you won't need to save R objects. The contents of your script should be sufficient to reproduce the objects you need.
+
+By default, R Studio will ask if you want to save your Environment (with all your R objects) when you exit
+
+![save workspace](https://tim9800.github.io/r_workshop_2024/img/save_workspace.png)
+Alternatively, you can save a single R object with
+
+```{r}
+saveRDS(df,
+        file = "neurobio_synthetic_updated.RDS")
+```
+
 
 ---
 class: inverse middle center tidyverse-title
 
-# Data manipulation with
+# Data wrangling with
 
 ---
 <img src="https://tim9800.github.io/r_workshop_2024/img/tidyverse_logo.png" class="embed-right-icon">
@@ -546,8 +638,7 @@ To install packages, we use the function `install.packages()` on tidyverse (quot
 install.packages("tidyverse") # Try autocomplete!
 ```
 
-After installing a package, we must attach it to R to use its features. This is
-by calling the `library()` function on tidyverse (no quotes)
+After installing a package, we must attach it to R to use its features. Let's do this by calling the `library()` function on tidyverse (no quotes)
 
 ```{r}
 library(tidyverse) # Autocomplete to the rescue
@@ -560,13 +651,95 @@ library(tidyverse) # Autocomplete to the rescue
 
 
 ---
+name: select
+
+## `select()`: column-wise subsetting
+
+This function allows us to **select** a subset of variables in our data.
+
+--
+
+template: select
+
+Let's remind ourselves of the variables we're working with
+
+```{r, eval = FALSE}
+names(df)
+```
+
+--
+
+**Example 1**: Selecting 1 variable
+
+```{r, eval = TRUE, R.options=list(max.print=5)}
+df_select_1 <- select(df, age)
+df_select_1
+```
+
+---
+template: select
+
+**Example 2**: Select multiple variables
+
+```{r, eval = TRUE, R.options=list(max.print=15)}
+df_select_2 <- select(df, age, sex_at_birth.factor, scid_mdd_current)
+df_select_2
+```
+
+---
+template: select
+
+**Example 3**: Select consecutive variables using the `:` operator
+
+```{r, eval = TRUE, R.options=list(max.print=20)}
+df_select_3 <- select(df, age:sofas_score)
+df_select_3
+```
+
+
+---
+template: select
+
+**Example 4**: Select variables which start with "scid"
+
+```{r, eval = TRUE, R.options=list(max.print=15)}
+df_select_4 <- select(df, starts_with("scid"))
+df_select_4
+```
+
+---
+template: select
+
+There are many more **tidy selection helpers**. Find out more about them using
+`?select`
+
+* `ends_with("...")` - select variables ending in "..."
+
+* `c()` - combine multiple helpers, e.g. `c(age, sex_at_birth.factor, ends_with(".factor")`
+
+* `where(is.numeric)` - select only numeric variables
+
+---
 ## `%>%`: pipes
 
 ---
-## `select()`: column-wise subsetting
+name:filter
 
----
 ## `filter()`: row-wise subsetting
+
+This function allows us to **filter** *in* observations using logical propositions.
+
+--
+
+**Example 1**: Filter in the adults
+
+```{r, eval = TRUE, R.options=list(max.print=20)}
+df_filter_1 <- df %>%
+  filter(age >= 18)
+
+```
+
+
 
 ---
 ## Logical statements
@@ -579,6 +752,24 @@ There are many kinds of conditions we can use to filter the rows of a dataset
 ## `mutate()`: make new variables
 
 ---
+## `mutate()` + `case_when()`
+
+---
 ## `summarise()`: data summaries
+
+---
+## Resources
+
+---
+## Acknowledgements
+
+* Charles Lanfear's [Introduction to R workshop](https://clanfear.github.io/Intro_R_Workshop/)
+
+* Nick Ho's [Introduction into R Workshop](https://sydney-informatics-hub.github.io/lessonbmc/)
+
+* YMH clinical studies team for enabling the Neurobiology follow-up study to
+happen (collecting participant follow-up data is a long and painful road)
+
+
 
 
