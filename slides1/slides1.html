@@ -62,7 +62,17 @@ name: colors
 
 4. Working with external data
 
-5. Data wrangling with `tidyverse`
+.center[Break for 15 minutes]
+
+&lt;ol start="5"&gt;
+  &lt;li&gt;Data wrangling with &lt;code&gt;tidyverse&lt;/code&gt;
+  &lt;ul style="line-height: 2em; margin-bottom: 2em"&gt;
+    &lt;li&gt;&lt;code&gt; select() &lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt; %&gt;% &lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt; filter() &lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt; mutate() &lt;/code&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ol&gt;
 
 ---
 class: inverse center middle
@@ -661,6 +671,7 @@ Generally speaking, you won't need to save R objects. The contents of your scrip
 By default, R Studio will ask if you want to save your Environment (with all your R objects) when you exit
 
 ![save workspace](https://tim9800.github.io/r_workshop_2024/img/save_workspace.png)
+
 Alternatively, you can save a single R object with
 
 
@@ -856,10 +867,7 @@ df_select_6 &lt;- select(df_select_5, starts_with("scid"))
 
 --
 
-Using the pipe operator (`%&gt;%`) makes operations easier to follow.
-
-In plain English,
-it means 'use whatever comes before me as input for whatever comes after me'.
+In plain English, `%&gt;%` means 'use whatever comes before me as input for whatever comes after me'.
 
 
 ``` r
@@ -875,7 +883,7 @@ name:filter
 
 ## `filter()`: row-wise subsetting
 
-This function allows us to **filter** *in* observations using logical propositions.
+This function allows us to **filter** *in* observations using logical expressions.
 
 --
 
@@ -883,7 +891,7 @@ This function allows us to **filter** *in* observations using logical propositio
 
 
 ``` r
-df_filter_1 &lt;- df %&gt;%
+df_filter_1 &lt;- df %&gt;% # Pipe df into filter() as an input
   filter(age &gt;= 18)
 ```
 
@@ -948,6 +956,8 @@ df_filter_7 &lt;- df %&gt;%
   filter(!is.na(scid_completed.factor))
 ```
 
+--
+
 ### Summary
 
 * Filter cuts down the rows of a dataset by using **logical expressions**
@@ -961,10 +971,133 @@ df_filter_7 &lt;- df %&gt;%
 `is.na()`
 
 ---
+name: mutate
 ## `mutate()`: make new variables
 
+Create new variables, or modify existing ones, with `mutate()`
+
+Syntax
+
+
+``` r
+df_mutate_1 &lt;- df %&gt;%
+  mutate(new_variable = do_something(old_variable))
+```
+
+* `new_variable` is the name of the variable you want to create. This can be:
+
+  * A completely new name --&gt; creates new variable
+  * A name that already exists in the dataset --&gt; modifies that variable
+  
+* `do_something()` is something that transforms `old_variable`, e.g.
+
+
+``` r
+df_mutate_1 &lt;- df %&gt;%
+  mutate(new_variable = old_variable + 2)
+```
+
 ---
+## `mutate()`: make new variables
+
+**Example 1**: Create a new variable of Z-scores for each participant's
+QIDS score
+
+Recall that we can calculate z-scores using:&lt;br&gt;&lt;br&gt;
+
+`$$z = \frac{x - \bar{x}}{\sigma}$$` &lt;br&gt;
+--
+
+
+``` r
+df_mutate_1 &lt;- df %&gt;%
+  filter(qidsc_total_score != 999) %&gt;% # Filter out missings
+  mutate(qidsc_total_score_z = 
+           qidsc_total_score - mean(qidsc_total_score) /
+           sd(qidsc_total_score))
+```
+
+---
+## `mutate()`: make new variables
+
+**Example 2**: Turn SOFAS score (0-100) into a proportion (0-1)
+
+
+``` r
+df_mutate_2 &lt;- df %&gt;%
+  filter(sofas_score != 999) %&gt;% # Filter out missings
+  mutate(sofas_score = sofas_score / 100)
+df_mutate_2$sofas_score
+```
+
+```
+##   [1] 0.51 0.85 0.70 0.68 0.75 0.85 0.95 0.60 0.76 0.83 0.75 0.72 0.55 0.70 0.55 0.85
+##  [17] 0.30 0.66 0.60 0.65 0.55 0.78 0.85 0.65 0.48 0.10 0.85 0.20 0.80 0.71 0.65 0.72
+##  [33] 0.65 0.31 0.70 0.78 0.55 0.60 0.65 0.85 0.62 0.51 0.70 0.51 0.80 0.65 0.51 0.51
+##  [49] 0.58 0.75 0.73 0.81 0.55 0.80 0.55 0.67 0.60 0.68 0.80 0.70 0.50 0.40 0.43 0.62
+##  [65] 0.85 0.63 0.80 0.74 0.68 0.90 0.91 0.78 0.73 0.70 0.85 0.80 0.50 0.81 0.83 0.63
+##  [81] 0.70 0.55 0.71 0.78 0.50 0.70 0.50 0.85 0.70 0.55 0.51 0.68 0.65 0.80 0.57 0.65
+##  [97] 0.78 0.63 0.85 0.78 0.68 0.65 0.75 0.66 0.78 0.80 0.65 0.70 0.53 0.65 0.68 0.43
+## [113] 0.85 0.50 0.60 0.75 0.87 0.75 0.36 0.45 0.65 0.61 0.72 0.70 0.70 0.70 0.85 0.53
+## [129] 0.70 0.61 0.68 0.60 0.55 0.70 0.10 0.51 0.65 0.55 0.90 0.65 0.45 0.70 0.51 0.83
+## [145] 0.85 0.42 0.55 0.73 0.73 0.60 0.71 0.30 0.55 0.55 0.90 0.50 0.78 0.68 0.55 0.71
+## [161] 0.95 0.83 0.70 0.58 0.67 0.45 0.70 0.71 0.55 0.82 0.78 0.83 0.76 0.55 0.58 0.70
+## [177] 0.85 0.45 0.61 0.41 0.55 0.50 0.83 0.71 0.65 0.52 0.40 0.51 0.77 0.77 0.65 0.85
+## [193] 0.92 0.85 0.55 0.65 0.75 0.55 0.70 0.78 0.85 0.70 0.95 0.65 0.80 0.85 0.75 0.71
+## [209] 0.60 0.85 0.85 0.70 0.10 0.70 0.64 0.53 0.58 0.63 0.63 0.50 0.73 0.31 0.61 0.55
+## [225] 0.41 0.63 0.65 0.62 0.85 0.64 0.55 0.70 0.51 0.55 0.81 0.50 0.90 0.60 0.72 0.78
+## [241] 0.65 0.70 0.48 0.55 0.69 0.91 0.63 0.80 0.90 0.30 0.81 0.60 0.66 0.72 0.70 0.70
+## [257] 0.65 0.40 0.62 0.65 0.85 0.70 0.51 0.82 0.70 0.85 0.65 0.75
+```
+
+---
+name: mutate case when
 ## `mutate()` + `case_when()`
+
+Mutate can be combined with the dplyr verb case_when() to create a variable
+using a complex combination of other variables
+
+--
+template: mutate case when
+
+* Creating categorical variables (factors) from numeric variables
+
+* Recoding specific values within a numeric variable
+
+---
+template: mutate case when
+
+
+**Example 1**: Categorise participants as children (&lt;18), youth (18-35) or adult (&gt;35)
+
+
+``` r
+df_mutate_cw_1 &lt;- df %&gt;%
+  mutate(
+    age_group = case_when(
+      age &lt; 18 ~ "Child",
+      age &gt;= 18 &amp; age &lt;= 35 ~ "Youth",
+      age &gt; 35 ~ "Adult"
+    ) %&gt;% as.factor() # Converts age_group into a factor
+  )
+```
+
+---
+template: mutate case when
+
+**Example 2**: Recode SOFAS variable so that the 999s are converted to `NA`
+
+
+``` r
+df_mutate_cw_2 &lt;- df %&gt;%
+  mutate(
+    sofas_score = case_when(
+      sofas_score == 999 ~ NA,
+      .default = sofas_score
+    )
+  )
+```
+
 
 ---
 ## `summarise()`: data summaries
