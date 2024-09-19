@@ -16,7 +16,7 @@ layout: default
 
 ## Workshop materials
 
-The link to the presentation slides will appear here when they are ready
+* [Presentation slides](https://tim9800.github.io/r_workshop_2024/slides1/slides1.html)
 
 * [Workshop dataset: sleep and depression in the Neurobiology cohort (synthetic data)](https://tim9800.github.io/r_workshop_2024/data/neurobio_synthetic.csv)
 
