@@ -6,3 +6,5 @@ vendor
 Gemfile.lock
 .Rproj.user
 .Rhistory
+**/*.csv
+**/*.RDS
