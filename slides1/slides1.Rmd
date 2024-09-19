@@ -710,10 +710,12 @@ df_select_4
 ---
 template: select
 
-There are many more **tidy selection helpers**. Find out more about them using
+There are many more **tidy selection helpers**. Check them out using
 `?select`
 
 * `ends_with("...")` - select variables ending in "..."
+
+* `!` - put this in front of a helper to **negate it**
 
 * `c()` - combine multiple helpers, e.g. `c(age, sex_at_birth.factor, ends_with(".factor")`
 
@@ -721,6 +723,31 @@ There are many more **tidy selection helpers**. Find out more about them using
 
 ---
 ## `%>%`: pipes
+
+Pipes are a convenient way to chain functions together.
+
+**Example** Consider the following selections
+
+```{r}
+df_select_5 <- select(df, starts_with("s"))
+
+df_select_6 <- select(df_select_5, starts_with("scid"))
+```
+
+--
+
+Using the pipe operator (`%>%`) makes operations easier to follow.
+
+In plain English,
+it means 'use whatever comes before me as input for whatever comes after me'.
+
+```{r}
+df_select_pipe <- df %>%
+  select(starts_with("s")) %>%
+  select(starts_with("scid"))
+```
+
+
 
 ---
 name:filter
@@ -731,7 +758,7 @@ This function allows us to **filter** *in* observations using logical propositio
 
 --
 
-**Example 1**: Filter in the adults
+**Example 1**: Filter in those who are 18+
 
 ```{r, eval = TRUE, R.options=list(max.print=20)}
 df_filter_1 <- df %>%
@@ -739,14 +766,73 @@ df_filter_1 <- df %>%
 
 ```
 
+**Example 2**: Filter in 18-year-olds
 
+```{r}
+df_filter_2 <- df %>%
+  filter(age == 18)
+```
+
+**Example 3**: Filter out 18-year-olds
+
+```{r}
+df_filter_3 <- df %>%
+  filter(age != 18)
+```
 
 ---
-## Logical statements
+template: filter
 
-There are many kinds of conditions we can use to filter the rows of a dataset
+**Example 4**: Filter in participants who are in between 18 and 35 years old
 
-* 
+```{r}
+df_filter_4 <- df %>%
+  filter(age %in% 18:35)
+```
+
+--
+
+**Example 5**: Filter in participants who are in clinical stage 1a or 1b
+
+```{r}
+df_filter_5 <- df %>%
+  filter(clinical_stage.factor %in% c("1a", "1b"))
+```
+
+--
+
+**Example 6** Filter in participants who are between 18 and 35 years old, AND
+who are in clinical stage 1a or 1b
+
+```{r}
+df_filter_6 <- df %>%
+  filter(clinical_stage.factor %in% c("1a", "1b") &
+           age %in% 18:35)
+
+```
+
+---
+template: filter
+
+**Example 7**: Filter in participants who do not have *NA* (missing value) for
+`scid_completed`
+
+```{r}
+df_filter_7 <- df %>%
+  filter(!is.na(scid_completed.factor))
+```
+
+### Summary
+
+* Filter cuts down the rows of a dataset by using **logical expressions**
+
+* A logical expression is one that evaluates to TRUE or FALSE
+
+* A logical expression can contain logical operators, such as `>`, `==`,
+`!=` and `%in%`
+
+* A logical expression can be a function that evaluates to TRUE or FALSE, like
+`is.na()`
 
 ---
 ## `mutate()`: make new variables
