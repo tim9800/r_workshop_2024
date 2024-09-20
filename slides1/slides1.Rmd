@@ -58,9 +58,10 @@ name: housekeeping
 
 2. Have you downloaded R and RStudio?
 
-3. Have you downloaded XCode (Mac) or Rtools (Windows)?
+3. ~~Have you downloaded XCode (Mac) or Rtools (Windows)?~~
+  * *Step 3 is no longer necessary*
 
-If are stuck on Step 2 or 3, **please let us know now**
+If are stuck on Step 2, **please let us know now**
 ---
 name: colors
 
@@ -845,7 +846,6 @@ df_filter_7 <- df %>%
 `is.na()`
 
 ---
-name: mutate
 ## `mutate()`: make new variables
 
 Create new variables, or modify existing ones, with `mutate()`
@@ -853,7 +853,7 @@ Create new variables, or modify existing ones, with `mutate()`
 Syntax
 
 ```{r, eval = FALSE}
-df_mutate_1 <- df %>%
+df %>%
   mutate(new_variable = do_something(old_variable))
 ```
 
@@ -865,19 +865,26 @@ df_mutate_1 <- df %>%
 * `do_something()` is something that transforms `old_variable`, e.g.
 
 ```{r, eval = FALSE}
-df_mutate_1 <- df %>%
+df %>%
   mutate(new_variable = old_variable + 2)
 ```
 
 ---
 ## `mutate()`: make new variables
 
-**Example 1**: Create a new variable of Z-scores for each participant's
-QIDS score
+**Example 1**: Create a new variable of Z-scores for each participant's QIDS score
 
 Recall that we can calculate z-scores using:<br><br>
 
-$$z = \frac{x - \bar{x}}{\sigma}$$ <br>
+.pull-left[
+  $$z = \frac{x - \bar{x}}{\sigma}$$
+]
+
+$x$ = `qidsc_total_score`  
+$\bar{x}$ = `mean(qidsc_total_score)`  
+$\sigma$ = `sd(qidsc_total_score)`
+
+<br>
 --
 
 ```{r}
@@ -892,14 +899,85 @@ df_mutate_1 <- df %>%
 ---
 ## `mutate()`: make new variables
 
-**Example 2**: Turn SOFAS score (0-100) into a proportion (0-1)
+**Example 1**: Create a new variable of Z-scores for each participant's QIDS score
+
+Let's quickly compare the z-score variable with the raw QIDS total
+score
+
+```{r, R.options=list(max.print=10)}
+df_mutate_1 %>%
+  select(qidsc_total_score, qidsc_total_score_z)
+```
+
+**Something's a bit fishy with these z-scores ...**
+
+---
+## `mutate()`: make new variables
+
+**Example 1**: Create a new variable of Z-scores for each participant's QIDS score
 
 ```{r}
+df_mutate_1 <- df %>%
+  filter(qidsc_total_score != 999) %>% # Filter out missings
+  mutate(qidsc_total_score_z = 
+           qidsc_total_score - mean(qidsc_total_score) / #<<
+           sd(qidsc_total_score))
+
+```
+
+--
+
+We forgot to put brackets around the numerator! Let's fix that
+
+---
+## `mutate()`: make new variables
+
+**Example 1**: Create a new variable of Z-scores for each participant's QIDS score
+
+```{r}
+df_mutate_1 <- df %>%
+  filter(qidsc_total_score != 999) %>% # Filter out missings
+  mutate(qidsc_total_score_z = 
+           (qidsc_total_score - mean(qidsc_total_score)) /
+           sd(qidsc_total_score))
+
+```
+
+We forgot to put brackets around the numerator! Let's fix that
+
+--
+
+```{r, R.options=list(max.print=10)}
+df_mutate_1 %>%
+  select(qidsc_total_score, qidsc_total_score_z)
+```
+
+---
+## `mutate()`: make new variables
+
+**Example 2**: Turn SOFAS score (0-100) into a proportion (0-1)
+
+```{r, R.options=list(max.print=26)}
 df_mutate_2 <- df %>%
   filter(sofas_score != 999) %>% # Filter out missings
   mutate(sofas_score = sofas_score / 100)
 df_mutate_2$sofas_score
 ```
+
+---
+## `mutate()`: make new variables
+
+**Example 2**: Turn SOFAS score (0-100) into a proportion (0-1)
+
+```{r, R.options=list(max.print=26)}
+df_mutate_2 <- df %>%
+  filter(sofas_score != 999) %>% # Filter out missings
+  mutate(sofas_score = sofas_score / 100) #<<
+df_mutate_2$sofas_score
+```
+
+Because we have `sofas_score` on both sides of statement, we modify
+`sofas_score` instead of making a new variable
 
 ---
 name: mutate case when
@@ -951,6 +1029,14 @@ df_mutate_cw_2 <- df %>%
 ---
 ## `summarise()`: data summaries
 
+This function is useful for creating custom summaries of variables in your data.
+
+#### Syntax
+```{r}
+
+```
+
+
 ---
 ## Resources
 
@@ -960,6 +1046,8 @@ df_mutate_cw_2 <- df %>%
 * Charles Lanfear's [Introduction to R workshop](https://clanfear.github.io/Intro_R_Workshop/)
 
 * Nick Ho's [Introduction into R Workshop](https://sydney-informatics-hub.github.io/lessonbmc/)
+
+* Victor An for suggesting ideas and proofreading these slides
 
 * YMH clinical studies team for enabling the Neurobiology follow-up study to
 happen (collecting participant follow-up data is a long and painful road)

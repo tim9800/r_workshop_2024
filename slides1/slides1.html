@@ -46,9 +46,10 @@ name: housekeeping
 
 2. Have you downloaded R and RStudio?
 
-3. Have you downloaded XCode (Mac) or Rtools (Windows)?
+3. ~~Have you downloaded XCode (Mac) or Rtools (Windows)?~~
+  * *Step 3 is no longer necessary*
 
-If are stuck on Step 2 or 3, **please let us know now**
+If are stuck on Step 2, **please let us know now**
 ---
 name: colors
 
@@ -971,7 +972,6 @@ df_filter_7 &lt;- df %&gt;%
 `is.na()`
 
 ---
-name: mutate
 ## `mutate()`: make new variables
 
 Create new variables, or modify existing ones, with `mutate()`
@@ -980,7 +980,7 @@ Syntax
 
 
 ``` r
-df_mutate_1 &lt;- df %&gt;%
+df %&gt;%
   mutate(new_variable = do_something(old_variable))
 ```
 
@@ -993,19 +993,26 @@ df_mutate_1 &lt;- df %&gt;%
 
 
 ``` r
-df_mutate_1 &lt;- df %&gt;%
+df %&gt;%
   mutate(new_variable = old_variable + 2)
 ```
 
 ---
 ## `mutate()`: make new variables
 
-**Example 1**: Create a new variable of Z-scores for each participant's
-QIDS score
+**Example 1**: Create a new variable of Z-scores for each participant's QIDS score
 
 Recall that we can calculate z-scores using:&lt;br&gt;&lt;br&gt;
 
-`$$z = \frac{x - \bar{x}}{\sigma}$$` &lt;br&gt;
+.pull-left[
+  `$$z = \frac{x - \bar{x}}{\sigma}$$`
+]
+
+`\(x\)` = `qidsc_total_score`  
+`\(\bar{x}\)` = `mean(qidsc_total_score)`  
+`\(\sigma\)` = `sd(qidsc_total_score)`
+
+&lt;br&gt;
 --
 
 
@@ -1015,6 +1022,84 @@ df_mutate_1 &lt;- df %&gt;%
   mutate(qidsc_total_score_z = 
            qidsc_total_score - mean(qidsc_total_score) /
            sd(qidsc_total_score))
+```
+
+---
+## `mutate()`: make new variables
+
+**Example 1**: Create a new variable of Z-scores for each participant's QIDS score
+
+Let's quickly compare the z-score variable with the raw QIDS total
+score
+
+
+``` r
+df_mutate_1 %&gt;%
+  select(qidsc_total_score, qidsc_total_score_z)
+```
+
+```
+##   qidsc_total_score qidsc_total_score_z
+## 1                14           11.637666
+## 2                 6            3.637666
+## 3                 7            4.637666
+## 4                 8            5.637666
+## 5                11            8.637666
+##  [ reached 'max' / getOption("max.print") -- omitted 261 rows ]
+```
+
+**Something's a bit fishy with these z-scores ...**
+
+---
+## `mutate()`: make new variables
+
+**Example 1**: Create a new variable of Z-scores for each participant's QIDS score
+
+
+``` r
+df_mutate_1 &lt;- df %&gt;%
+  filter(qidsc_total_score != 999) %&gt;% # Filter out missings
+  mutate(qidsc_total_score_z = 
+*          qidsc_total_score - mean(qidsc_total_score) /
+           sd(qidsc_total_score))
+```
+
+--
+
+We forgot to put brackets around the numerator! Let's fix that
+
+---
+## `mutate()`: make new variables
+
+**Example 1**: Create a new variable of Z-scores for each participant's QIDS score
+
+
+``` r
+df_mutate_1 &lt;- df %&gt;%
+  filter(qidsc_total_score != 999) %&gt;% # Filter out missings
+  mutate(qidsc_total_score_z = 
+           (qidsc_total_score - mean(qidsc_total_score)) /
+           sd(qidsc_total_score))
+```
+
+We forgot to put brackets around the numerator! Let's fix that
+
+--
+
+
+``` r
+df_mutate_1 %&gt;%
+  select(qidsc_total_score, qidsc_total_score_z)
+```
+
+```
+##   qidsc_total_score qidsc_total_score_z
+## 1                14          0.69760763
+## 2                 6         -1.05093070
+## 3                 7         -0.83236341
+## 4                 8         -0.61379612
+## 5                11          0.04190576
+##  [ reached 'max' / getOption("max.print") -- omitted 261 rows ]
 ```
 
 ---
@@ -1031,24 +1116,32 @@ df_mutate_2$sofas_score
 ```
 
 ```
-##   [1] 0.51 0.85 0.70 0.68 0.75 0.85 0.95 0.60 0.76 0.83 0.75 0.72 0.55 0.70 0.55 0.85
-##  [17] 0.30 0.66 0.60 0.65 0.55 0.78 0.85 0.65 0.48 0.10 0.85 0.20 0.80 0.71 0.65 0.72
-##  [33] 0.65 0.31 0.70 0.78 0.55 0.60 0.65 0.85 0.62 0.51 0.70 0.51 0.80 0.65 0.51 0.51
-##  [49] 0.58 0.75 0.73 0.81 0.55 0.80 0.55 0.67 0.60 0.68 0.80 0.70 0.50 0.40 0.43 0.62
-##  [65] 0.85 0.63 0.80 0.74 0.68 0.90 0.91 0.78 0.73 0.70 0.85 0.80 0.50 0.81 0.83 0.63
-##  [81] 0.70 0.55 0.71 0.78 0.50 0.70 0.50 0.85 0.70 0.55 0.51 0.68 0.65 0.80 0.57 0.65
-##  [97] 0.78 0.63 0.85 0.78 0.68 0.65 0.75 0.66 0.78 0.80 0.65 0.70 0.53 0.65 0.68 0.43
-## [113] 0.85 0.50 0.60 0.75 0.87 0.75 0.36 0.45 0.65 0.61 0.72 0.70 0.70 0.70 0.85 0.53
-## [129] 0.70 0.61 0.68 0.60 0.55 0.70 0.10 0.51 0.65 0.55 0.90 0.65 0.45 0.70 0.51 0.83
-## [145] 0.85 0.42 0.55 0.73 0.73 0.60 0.71 0.30 0.55 0.55 0.90 0.50 0.78 0.68 0.55 0.71
-## [161] 0.95 0.83 0.70 0.58 0.67 0.45 0.70 0.71 0.55 0.82 0.78 0.83 0.76 0.55 0.58 0.70
-## [177] 0.85 0.45 0.61 0.41 0.55 0.50 0.83 0.71 0.65 0.52 0.40 0.51 0.77 0.77 0.65 0.85
-## [193] 0.92 0.85 0.55 0.65 0.75 0.55 0.70 0.78 0.85 0.70 0.95 0.65 0.80 0.85 0.75 0.71
-## [209] 0.60 0.85 0.85 0.70 0.10 0.70 0.64 0.53 0.58 0.63 0.63 0.50 0.73 0.31 0.61 0.55
-## [225] 0.41 0.63 0.65 0.62 0.85 0.64 0.55 0.70 0.51 0.55 0.81 0.50 0.90 0.60 0.72 0.78
-## [241] 0.65 0.70 0.48 0.55 0.69 0.91 0.63 0.80 0.90 0.30 0.81 0.60 0.66 0.72 0.70 0.70
-## [257] 0.65 0.40 0.62 0.65 0.85 0.70 0.51 0.82 0.70 0.85 0.65 0.75
+##  [1] 0.51 0.85 0.70 0.68 0.75 0.85 0.95 0.60 0.76 0.83 0.75 0.72 0.55
+## [14] 0.70 0.55 0.85 0.30 0.66 0.60 0.65 0.55 0.78 0.85 0.65 0.48 0.10
+##  [ reached getOption("max.print") -- omitted 242 entries ]
 ```
+
+---
+## `mutate()`: make new variables
+
+**Example 2**: Turn SOFAS score (0-100) into a proportion (0-1)
+
+
+``` r
+df_mutate_2 &lt;- df %&gt;%
+  filter(sofas_score != 999) %&gt;% # Filter out missings
+* mutate(sofas_score = sofas_score / 100)
+df_mutate_2$sofas_score
+```
+
+```
+##  [1] 0.51 0.85 0.70 0.68 0.75 0.85 0.95 0.60 0.76 0.83 0.75 0.72 0.55
+## [14] 0.70 0.55 0.85 0.30 0.66 0.60 0.65 0.55 0.78 0.85 0.65 0.48 0.10
+##  [ reached getOption("max.print") -- omitted 242 entries ]
+```
+
+Because we have `sofas_score` on both sides of statement, we modify
+`sofas_score` instead of making a new variable
 
 ---
 name: mutate case when
@@ -1102,6 +1195,12 @@ df_mutate_cw_2 &lt;- df %&gt;%
 ---
 ## `summarise()`: data summaries
 
+This function is useful for creating custom summaries of variables in your data.
+
+#### Syntax
+
+
+
 ---
 ## Resources
 
@@ -1111,6 +1210,8 @@ df_mutate_cw_2 &lt;- df %&gt;%
 * Charles Lanfear's [Introduction to R workshop](https://clanfear.github.io/Intro_R_Workshop/)
 
 * Nick Ho's [Introduction into R Workshop](https://sydney-informatics-hub.github.io/lessonbmc/)
+
+* Victor An for suggesting ideas and proofreading these slides
 
 * YMH clinical studies team for enabling the Neurobiology follow-up study to
 happen (collecting participant follow-up data is a long and painful road)
