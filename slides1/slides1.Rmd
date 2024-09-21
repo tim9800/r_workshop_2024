@@ -575,11 +575,11 @@ my data
 
 * `names(df)`
 
-* `str(df)`
+* `str(df)`: **str**ucture of a dataframe
 
-* `df$...`
+* `df$...`: View one variable (...) of the dataframe
 
-* `table(df$...)`
+* `table(df$...)`: Frequency table of (...)
 
 ---
 ## Writing to .csv files
@@ -976,8 +976,7 @@ df_mutate_2 <- df %>%
 df_mutate_2$sofas_score
 ```
 
-Because we have `sofas_score` on both sides of statement, we modify
-`sofas_score` instead of making a new variable
+Because we have `sofas_score` on both sides of the statement, we modify `sofas_score` instead of making a new variable
 
 ---
 name: mutate case when
@@ -1025,20 +1024,10 @@ df_mutate_cw_2 <- df %>%
   )
 ```
 
-
----
-## `summarise()`: data summaries
-
-This function is useful for creating custom summaries of variables in your data.
-
-#### Syntax
-```{r}
-
-```
-
-
 ---
 ## Resources
+
+Links to further readings are available on my [R workshop website](https://tim9800.github.io/r_workshop_2024/).
 
 ---
 ## Acknowledgements
