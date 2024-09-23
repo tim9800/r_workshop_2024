@@ -81,7 +81,7 @@ name: colors
   <li>Data wrangling with <code>tidyverse</code>
   <ul style="line-height: 2em; margin-bottom: 2em">
     <li><code> select() </code></li>
-    <li><code> %>% </code></li>
+    <li><code> |> </code></li>
     <li><code> filter() </code></li>
     <li><code> mutate() </code></li>
   </ul>
@@ -261,12 +261,11 @@ Objects
 To make an object, you must first come up with a valid name:
 
 * Starts with a letter [A-Za-z]
-* NOT starting with a number [0-9] or special character [._]
+* NOT starting with a number [0-9]
 
 ```{r, eval = FALSE}
 my_object
-.bad_name
-1another_bad_name
+1bad_name
 ```
 
 Next, bind an object to the name using the `<-` operator
