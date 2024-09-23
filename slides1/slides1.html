@@ -87,7 +87,8 @@ name: what R
 .col-flex-container[
   .column[
   ### Statistical
-  ANOVA, regression, t.tests,\n
+  ANOVA, regression,  
+  `\(t\)`-tests,
   descriptives, summaries
   
   Data wrangling
@@ -244,7 +245,7 @@ Objects
 
 --
 
-.footnote[\* Not completely true. Hadley Wickham insists that names have objects&lt;sup&gt;[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)&lt;/sup&gt;. To avoid this discussion, whenever I say an object has a name, this means that the name *refers to* or *references* the object.]
+.footnote[&lt;sup&gt;\*&lt;/sup&gt;Not completely true. Hadley Wickham insists that names have objects&lt;sup&gt;[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)&lt;/sup&gt;. To avoid this discussion, whenever I say an object has a name, this means that the name *refers to* or *references* the object.]
 
 ---
 ## Making and calling objects
@@ -672,6 +673,8 @@ Generally speaking, you won't need to save R objects. The contents of your scrip
 By default, R Studio will ask if you want to save your Environment (with all your R objects) when you exit
 
 ![save workspace](https://tim9800.github.io/r_workshop_2024/img/save_workspace.png)
+---
+## Saving and loading R objects
 
 Alternatively, you can save a single R object with
 
@@ -681,6 +684,14 @@ saveRDS(df,
         file = "neurobio_synthetic_updated.RDS")
 ```
 
+To read a single object into R, use:
+
+
+``` r
+df_read &lt;- readRDS(file = "neurobio_synthetic_updated.RDS")
+```
+
+As always, remember to assign your function calls to a name!
 
 ---
 class: inverse middle center tidyverse-title
@@ -853,7 +864,7 @@ There are many more **tidy selection helpers**. Check them out using
 * `where(is.numeric)` - select only numeric variables
 
 ---
-## `%&gt;%`: pipes
+## `|&gt;`: pipes&lt;sup&gt;*&lt;/sup&gt;
 
 Pipes are a convenient way to chain functions together.
 
@@ -868,15 +879,17 @@ df_select_6 &lt;- select(df_select_5, starts_with("scid"))
 
 --
 
-In plain English, `%&gt;%` means 'use whatever comes before me as input for whatever comes after me'.
+In plain English, `|&gt;` means 'use whatever comes before me as input for whatever comes after me'.
 
 
 ``` r
-df_select_pipe &lt;- df %&gt;%
-  select(starts_with("s")) %&gt;%
+df_select_pipe &lt;- df |&gt;
+  select(starts_with("s")) |&gt;
   select(starts_with("scid"))
 ```
 
+
+.footnote[&lt;sup&gt;*&lt;/sup&gt; `|&gt;` can also be written as `%&gt;%` &lt;sup&gt;[7](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/)&lt;/sup&gt;]
 
 
 ---
@@ -892,7 +905,7 @@ This function allows us to **filter** *in* observations using logical expression
 
 
 ``` r
-df_filter_1 &lt;- df %&gt;% # Pipe df into filter() as an input
+df_filter_1 &lt;- df |&gt; # Pipe df into filter() as an input
   filter(age &gt;= 18)
 ```
 
@@ -900,16 +913,16 @@ df_filter_1 &lt;- df %&gt;% # Pipe df into filter() as an input
 
 
 ``` r
-df_filter_2 &lt;- df %&gt;%
-  filter(age == 18)
+df_filter_2 &lt;- df |&gt;
+  filter(age == 18) # == is different to =
 ```
 
 **Example 3**: Filter out 18-year-olds
 
 
 ``` r
-df_filter_3 &lt;- df %&gt;%
-  filter(age != 18)
+df_filter_3 &lt;- df |&gt;
+  filter(age != 18) # != means 'is not equal to'
 ```
 
 ---
@@ -919,7 +932,7 @@ template: filter
 
 
 ``` r
-df_filter_4 &lt;- df %&gt;%
+df_filter_4 &lt;- df |&gt;
   filter(age %in% 18:35)
 ```
 
@@ -929,7 +942,7 @@ df_filter_4 &lt;- df %&gt;%
 
 
 ``` r
-df_filter_5 &lt;- df %&gt;%
+df_filter_5 &lt;- df |&gt;
   filter(clinical_stage.factor %in% c("1a", "1b"))
 ```
 
@@ -940,7 +953,7 @@ who are in clinical stage 1a or 1b
 
 
 ``` r
-df_filter_6 &lt;- df %&gt;%
+df_filter_6 &lt;- df |&gt;
   filter(clinical_stage.factor %in% c("1a", "1b") &amp;
            age %in% 18:35)
 ```
@@ -953,7 +966,7 @@ template: filter
 
 
 ``` r
-df_filter_7 &lt;- df %&gt;%
+df_filter_7 &lt;- df |&gt;
   filter(!is.na(scid_completed.factor))
 ```
 
@@ -980,7 +993,7 @@ Syntax
 
 
 ``` r
-df %&gt;%
+df |&gt;
   mutate(new_variable = do_something(old_variable))
 ```
 
@@ -993,7 +1006,7 @@ df %&gt;%
 
 
 ``` r
-df %&gt;%
+df |&gt;
   mutate(new_variable = old_variable + 2)
 ```
 
@@ -1017,8 +1030,8 @@ Recall that we can calculate z-scores using:&lt;br&gt;&lt;br&gt;
 
 
 ``` r
-df_mutate_1 &lt;- df %&gt;%
-  filter(qidsc_total_score != 999) %&gt;% # Filter out missings
+df_mutate_1 &lt;- df |&gt;
+  filter(qidsc_total_score != 999) |&gt; # Filter out missings
   mutate(qidsc_total_score_z = 
            qidsc_total_score - mean(qidsc_total_score) /
            sd(qidsc_total_score))
@@ -1034,7 +1047,7 @@ score
 
 
 ``` r
-df_mutate_1 %&gt;%
+df_mutate_1 |&gt;
   select(qidsc_total_score, qidsc_total_score_z)
 ```
 
@@ -1057,8 +1070,8 @@ df_mutate_1 %&gt;%
 
 
 ``` r
-df_mutate_1 &lt;- df %&gt;%
-  filter(qidsc_total_score != 999) %&gt;% # Filter out missings
+df_mutate_1 &lt;- df |&gt;
+  filter(qidsc_total_score != 999) |&gt; # Filter out missings
   mutate(qidsc_total_score_z = 
 *          qidsc_total_score - mean(qidsc_total_score) /
            sd(qidsc_total_score))
@@ -1075,8 +1088,8 @@ We forgot to put brackets around the numerator! Let's fix that
 
 
 ``` r
-df_mutate_1 &lt;- df %&gt;%
-  filter(qidsc_total_score != 999) %&gt;% # Filter out missings
+df_mutate_1 &lt;- df |&gt;
+  filter(qidsc_total_score != 999) |&gt; # Filter out missings
   mutate(qidsc_total_score_z = 
            (qidsc_total_score - mean(qidsc_total_score)) /
            sd(qidsc_total_score))
@@ -1088,7 +1101,7 @@ We forgot to put brackets around the numerator! Let's fix that
 
 
 ``` r
-df_mutate_1 %&gt;%
+df_mutate_1 |&gt;
   select(qidsc_total_score, qidsc_total_score_z)
 ```
 
@@ -1109,8 +1122,8 @@ df_mutate_1 %&gt;%
 
 
 ``` r
-df_mutate_2 &lt;- df %&gt;%
-  filter(sofas_score != 999) %&gt;% # Filter out missings
+df_mutate_2 &lt;- df |&gt;
+  filter(sofas_score != 999) |&gt; # Filter out missings
   mutate(sofas_score = sofas_score / 100)
 df_mutate_2$sofas_score
 ```
@@ -1128,8 +1141,8 @@ df_mutate_2$sofas_score
 
 
 ``` r
-df_mutate_2 &lt;- df %&gt;%
-  filter(sofas_score != 999) %&gt;% # Filter out missings
+df_mutate_2 &lt;- df |&gt;
+  filter(sofas_score != 999) |&gt; # Filter out missings
 * mutate(sofas_score = sofas_score / 100)
 df_mutate_2$sofas_score
 ```
@@ -1164,13 +1177,14 @@ template: mutate case when
 
 
 ``` r
-df_mutate_cw_1 &lt;- df %&gt;%
+df_mutate_cw_1 &lt;- df |&gt;
   mutate(
     age_group = case_when(
       age &lt; 18 ~ "Child",
       age &gt;= 18 &amp; age &lt;= 35 ~ "Youth",
       age &gt; 35 ~ "Adult"
-    ) %&gt;% as.factor() # Converts age_group into a factor
+      ) |&gt;
+      as.factor() # Converts age_group into a factor
   )
 ```
 
@@ -1181,7 +1195,7 @@ template: mutate case when
 
 
 ``` r
-df_mutate_cw_2 &lt;- df %&gt;%
+df_mutate_cw_2 &lt;- df |&gt;
   mutate(
     sofas_score = case_when(
       sofas_score == 999 ~ NA,
@@ -1218,6 +1232,7 @@ happen (collecting participant follow-up data is a long and painful road)
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "slideNumberFormat": "%current%",
+"highlightLanguage": "r",
 "highlightStyle": "tomorrow-night-bright",
 "highlightLines": true,
 "countIncrementalSlides": false

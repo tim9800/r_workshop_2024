@@ -9,6 +9,7 @@ output:
     css: ["xaringan-themer.css", "custom.css"]
     nature:
       slideNumberFormat: "%current%"
+      highlightLanguage: r
       highlightStyle: tomorrow-night-bright
       highlightLines: true
       countIncrementalSlides: false
@@ -99,7 +100,8 @@ name: what R
 .col-flex-container[
   .column[
   ### Statistical
-  ANOVA, regression, t.tests,\n
+  ANOVA, regression,  
+  $t$-tests,
   descriptives, summaries
   
   Data wrangling
@@ -252,7 +254,7 @@ Objects
 
 --
 
-.footnote[\* Not completely true. Hadley Wickham insists that names have objects<sup>[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)</sup>. To avoid this discussion, whenever I say an object has a name, this means that the name *refers to* or *references* the object.]
+.footnote[<sup>\*</sup>Not completely true. Hadley Wickham insists that names have objects<sup>[1](https://x.com/hadleywickham/status/732288980549390336?lang=en), [2](https://adv-r.hadley.nz/names-values.html#binding-basics)</sup>. To avoid this discussion, whenever I say an object has a name, this means that the name *refers to* or *references* the object.]
 
 ---
 ## Making and calling objects
@@ -601,6 +603,8 @@ Generally speaking, you won't need to save R objects. The contents of your scrip
 By default, R Studio will ask if you want to save your Environment (with all your R objects) when you exit
 
 ![save workspace](https://tim9800.github.io/r_workshop_2024/img/save_workspace.png)
+---
+## Saving and loading R objects
 
 Alternatively, you can save a single R object with
 
@@ -609,6 +613,13 @@ saveRDS(df,
         file = "neurobio_synthetic_updated.RDS")
 ```
 
+To read a single object into R, use:
+
+```{r}
+df_read <- readRDS(file = "neurobio_synthetic_updated.RDS")
+```
+
+As always, remember to assign your function calls to a name!
 
 ---
 class: inverse middle center tidyverse-title
@@ -734,7 +745,7 @@ There are many more **tidy selection helpers**. Check them out using
 * `where(is.numeric)` - select only numeric variables
 
 ---
-## `%>%`: pipes
+## `|>`: pipes<sup>*</sup>
 
 Pipes are a convenient way to chain functions together.
 
@@ -748,14 +759,16 @@ df_select_6 <- select(df_select_5, starts_with("scid"))
 
 --
 
-In plain English, `%>%` means 'use whatever comes before me as input for whatever comes after me'.
+In plain English, `|>` means 'use whatever comes before me as input for whatever comes after me'.
 
 ```{r}
-df_select_pipe <- df %>%
-  select(starts_with("s")) %>%
+df_select_pipe <- df |>
+  select(starts_with("s")) |>
   select(starts_with("scid"))
 ```
 
+
+.footnote[<sup>*</sup> `|>` can also be written as `%>%` <sup>[7](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/)</sup>]
 
 
 ---
@@ -770,7 +783,7 @@ This function allows us to **filter** *in* observations using logical expression
 **Example 1**: Filter in those who are 18+
 
 ```{r, eval = TRUE, R.options=list(max.print=20)}
-df_filter_1 <- df %>% # Pipe df into filter() as an input
+df_filter_1 <- df |> # Pipe df into filter() as an input
   filter(age >= 18)
 
 ```
@@ -778,15 +791,15 @@ df_filter_1 <- df %>% # Pipe df into filter() as an input
 **Example 2**: Filter in 18-year-olds
 
 ```{r}
-df_filter_2 <- df %>%
-  filter(age == 18)
+df_filter_2 <- df |>
+  filter(age == 18) # == is different to =
 ```
 
 **Example 3**: Filter out 18-year-olds
 
 ```{r}
-df_filter_3 <- df %>%
-  filter(age != 18)
+df_filter_3 <- df |>
+  filter(age != 18) # != means 'is not equal to'
 ```
 
 ---
@@ -795,7 +808,7 @@ template: filter
 **Example 4**: Filter in participants who are in between 18 and 35 years old
 
 ```{r}
-df_filter_4 <- df %>%
+df_filter_4 <- df |>
   filter(age %in% 18:35)
 ```
 
@@ -804,7 +817,7 @@ df_filter_4 <- df %>%
 **Example 5**: Filter in participants who are in clinical stage 1a or 1b
 
 ```{r}
-df_filter_5 <- df %>%
+df_filter_5 <- df |>
   filter(clinical_stage.factor %in% c("1a", "1b"))
 ```
 
@@ -814,7 +827,7 @@ df_filter_5 <- df %>%
 who are in clinical stage 1a or 1b
 
 ```{r}
-df_filter_6 <- df %>%
+df_filter_6 <- df |>
   filter(clinical_stage.factor %in% c("1a", "1b") &
            age %in% 18:35)
 
@@ -827,7 +840,7 @@ template: filter
 `scid_completed`
 
 ```{r}
-df_filter_7 <- df %>%
+df_filter_7 <- df |>
   filter(!is.na(scid_completed.factor))
 ```
 
@@ -853,7 +866,7 @@ Create new variables, or modify existing ones, with `mutate()`
 Syntax
 
 ```{r, eval = FALSE}
-df %>%
+df |>
   mutate(new_variable = do_something(old_variable))
 ```
 
@@ -865,7 +878,7 @@ df %>%
 * `do_something()` is something that transforms `old_variable`, e.g.
 
 ```{r, eval = FALSE}
-df %>%
+df |>
   mutate(new_variable = old_variable + 2)
 ```
 
@@ -888,8 +901,8 @@ $\sigma$ = `sd(qidsc_total_score)`
 --
 
 ```{r}
-df_mutate_1 <- df %>%
-  filter(qidsc_total_score != 999) %>% # Filter out missings
+df_mutate_1 <- df |>
+  filter(qidsc_total_score != 999) |> # Filter out missings
   mutate(qidsc_total_score_z = 
            qidsc_total_score - mean(qidsc_total_score) /
            sd(qidsc_total_score))
@@ -905,7 +918,7 @@ Let's quickly compare the z-score variable with the raw QIDS total
 score
 
 ```{r, R.options=list(max.print=10)}
-df_mutate_1 %>%
+df_mutate_1 |>
   select(qidsc_total_score, qidsc_total_score_z)
 ```
 
@@ -917,8 +930,8 @@ df_mutate_1 %>%
 **Example 1**: Create a new variable of Z-scores for each participant's QIDS score
 
 ```{r}
-df_mutate_1 <- df %>%
-  filter(qidsc_total_score != 999) %>% # Filter out missings
+df_mutate_1 <- df |>
+  filter(qidsc_total_score != 999) |> # Filter out missings
   mutate(qidsc_total_score_z = 
            qidsc_total_score - mean(qidsc_total_score) / #<<
            sd(qidsc_total_score))
@@ -935,8 +948,8 @@ We forgot to put brackets around the numerator! Let's fix that
 **Example 1**: Create a new variable of Z-scores for each participant's QIDS score
 
 ```{r}
-df_mutate_1 <- df %>%
-  filter(qidsc_total_score != 999) %>% # Filter out missings
+df_mutate_1 <- df |>
+  filter(qidsc_total_score != 999) |> # Filter out missings
   mutate(qidsc_total_score_z = 
            (qidsc_total_score - mean(qidsc_total_score)) /
            sd(qidsc_total_score))
@@ -948,7 +961,7 @@ We forgot to put brackets around the numerator! Let's fix that
 --
 
 ```{r, R.options=list(max.print=10)}
-df_mutate_1 %>%
+df_mutate_1 |>
   select(qidsc_total_score, qidsc_total_score_z)
 ```
 
@@ -958,8 +971,8 @@ df_mutate_1 %>%
 **Example 2**: Turn SOFAS score (0-100) into a proportion (0-1)
 
 ```{r, R.options=list(max.print=26)}
-df_mutate_2 <- df %>%
-  filter(sofas_score != 999) %>% # Filter out missings
+df_mutate_2 <- df |>
+  filter(sofas_score != 999) |> # Filter out missings
   mutate(sofas_score = sofas_score / 100)
 df_mutate_2$sofas_score
 ```
@@ -970,8 +983,8 @@ df_mutate_2$sofas_score
 **Example 2**: Turn SOFAS score (0-100) into a proportion (0-1)
 
 ```{r, R.options=list(max.print=26)}
-df_mutate_2 <- df %>%
-  filter(sofas_score != 999) %>% # Filter out missings
+df_mutate_2 <- df |>
+  filter(sofas_score != 999) |> # Filter out missings
   mutate(sofas_score = sofas_score / 100) #<<
 df_mutate_2$sofas_score
 ```
@@ -999,13 +1012,14 @@ template: mutate case when
 **Example 1**: Categorise participants as children (<18), youth (18-35) or adult (>35)
 
 ```{r}
-df_mutate_cw_1 <- df %>%
+df_mutate_cw_1 <- df |>
   mutate(
     age_group = case_when(
       age < 18 ~ "Child",
       age >= 18 & age <= 35 ~ "Youth",
       age > 35 ~ "Adult"
-    ) %>% as.factor() # Converts age_group into a factor
+      ) |>
+      as.factor() # Converts age_group into a factor
   )
 ```
 
@@ -1015,7 +1029,7 @@ template: mutate case when
 **Example 2**: Recode SOFAS variable so that the 999s are converted to `NA`
 
 ```{r}
-df_mutate_cw_2 <- df %>%
+df_mutate_cw_2 <- df |>
   mutate(
     sofas_score = case_when(
       sofas_score == 999 ~ NA,
