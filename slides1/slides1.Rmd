@@ -1052,7 +1052,7 @@ on the [Introduction to R github repository](https://github.com/tim9800/r_worksh
 
 * Nick Ho's [Introduction into R Workshop](https://sydney-informatics-hub.github.io/lessonbmc/)
 
-* Victor An for suggesting ideas and proofreading these slides
+* Victor An and Charles Lanfear for suggesting ideas and proofreading these slides
 
 * YMH clinical studies team for enabling the Neurobiology follow-up study to
 happen (collecting participant follow-up data is a long and painful road)
