@@ -9,7 +9,6 @@ output:
     css: ["xaringan-themer.css", "custom.css"]
     nature:
       slideNumberFormat: "%current%"
-      highlightLanguage: r
       highlightStyle: tomorrow-night-bright
       highlightLines: true
       countIncrementalSlides: false
