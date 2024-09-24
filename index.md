@@ -18,7 +18,7 @@ layout: default
 
 * [Presentation slides](https://tim9800.github.io/r_workshop_2024/slides1/slides1.html)
 
-* [Presentation recording](https://youtu.be/rXso5K2EroM) Link goes to YouTube
+* [Presentation recording](https://youtu.be/2drqAVGJIQo) Link goes to YouTube
 
 * [Workshop dataset: sleep and depression in the Neurobiology cohort (synthetic data)](https://tim9800.github.io/r_workshop_2024/data/neurobio_synthetic.csv)
 
