@@ -1,0 +1,38 @@
+body {
+    margin: 0px;
+}
+
+.navbar {
+    background-color: rgb(255, 247, 221);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vw;
+    padding-right: 50px;
+}
+
+.navbar-logo {
+    flex: 1 1 auto;
+    min-width: 100px;
+    max-width: 150px;
+}
+
+.navbar ul.buttons {
+    display: flex;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    gap: 50px;
+}
+
+.navbar ul a {
+    text-decoration: underline 0.13em rgb(224, 172, 104, 0);
+    transition: text-decoration-color 300ms;
+    font-size: 24px;
+    color:rgb(8, 41, 5);
+
+}
+
+.navbar ul a:hover {
+    text-decoration-color: rgba(224, 172, 104, 1)
+}
