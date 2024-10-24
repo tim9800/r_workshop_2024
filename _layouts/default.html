@@ -18,28 +18,15 @@
         {% if site.logo %}
           <a href="{{ "/" | absolute_url }}"><img src="{{site.logo | relative_url}}" alt="Logo" /></a>
         {% endif %}
-	<br>
-	<br>
-	<br>
 	
         <h3>University of Sydney</h3>
-	<h4><i><span style="font-weight:normal">Brain and Mind Centre, Youth Mental Health and Technology Team</span></i></h4>
-	<h4><i><span style="font-weight:normal">Spring, 2024</span></i></h4>
+        <h4><i><span style="font-weight:normal">Brain and Mind Centre, Youth Mental Health and Technology Team</span></i></h4>
+        <h4><i><span style="font-weight:normal">Spring, 2024</span></i></h4>
 
-	<hr>
-	
-	<p> This is the companion website for Introduction to R </p>
-  
-  <p> Instructor: {{ site.instructor }} </p>
-	<p> Email: {{ site.email }} </p>
-
-        {% if site.github.is_project_page %}
-        <p class="view"><a href="{{ site.github.repository_url }}">View the Source Code on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
-        {% endif %}
-
-        {% if site.github.is_user_page %}
-        <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
-        {% endif %}
+        <hr>
+        
+        <p> Instructor: {{ site.instructor }} </p>
+        <p> Email: {{ site.email }} </p>
 
         {% if site.show_downloads %}
         <ul class="downloads">
@@ -48,18 +35,14 @@
           <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
         </ul>
         {% endif %}
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </header>
       <section>
 
       {{ content }}
 
       </section>
-      <footer>
-        {% if site.github.is_project_page %}
-        <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %}
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
     </div>
     <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
   </body>
