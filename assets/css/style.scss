@@ -12,3 +12,12 @@ body {
 header img {
   margin-bottom: 50px;
 }
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  justify-content: right;
+  gap: 2vw;
+}

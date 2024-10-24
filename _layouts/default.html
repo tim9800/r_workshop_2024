@@ -14,9 +14,16 @@
   </head>
   <body>
     <div class="wrapper">
+      <div class="navbar">
+        <ul>
+          <li id="home-btn"><a href="/r_workshop_2024/">Home</a></li>
+          <li id="setup-btn"><a href="">Setup</a></li>
+          <li id="workshops-btn"><a href="">Workshops</a></li>
+        </ul>
+      </div>
       <header>
         {% if site.logo %}
-          <a href="{{ "/" | absolute_url }}"><img src="{{site.logo | relative_url}}" alt="Logo" /></a>
+          <a href="{{ '/' | absolute_url }}"><img src="{{site.logo | relative_url}}" alt="Logo" /></a>
         {% endif %}
 	
         <h3>University of Sydney</h3>
