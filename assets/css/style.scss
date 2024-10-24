@@ -21,3 +21,15 @@ header img {
   justify-content: right;
   gap: 2vw;
 }
+
+.navbar #setup-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(0,0,0,0.2);
+  min-width: 160px;
+  padding: 12px 16px;
+}
+
+.navbar #setup-btn:hover #setup-content {
+  display: block;
+}
