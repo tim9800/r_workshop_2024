@@ -13,6 +13,10 @@ header img {
   margin-bottom: 50px;
 }
 
+.navbar {
+  margin-bottom: 20px;
+}
+
 .navbar ul {
   display: flex;
   list-style: none;
@@ -20,6 +24,10 @@ header img {
   padding: 0px;
   justify-content: right;
   gap: 2vw;
+}
+
+.navbar li {
+  font-size: 16px;
 }
 
 .navbar #setup-content {
