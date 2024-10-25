@@ -17,14 +17,20 @@
       <div class="navbar">
         <ul>
           <li id="home-btn"><a href="/r_workshop_2024/">Home</a></li>
-          <li id="setup-btn">
+          <li id="setup-btn" class="navbar-btn">
             <a href="">Setup</a>
-            <div id="setup-content">
-              asdfasdfasdfasdfasdf
-            </div>
+            <ul id="setup-dropdown" class="navbar-dropdown">
+              <li><a href="#">Installing R</a></li>
+              <li><a href="#">Installing <code>tidyverse</code></a></li>
+            </ul>
+          </li>            
+          <li id="workshops-btn" class="navbar-btn">
+            <a href="">Workshops</a>
+            <ul id="workshops-dropdown" class="navbar-dropdown">
+              <li><a href="">1: Introduction to R</a></li>
+              <li><a href="">2: Plots and Statistical Testing</a></li>
+            </ul>
           </li>
-            
-          <li id="workshops-btn"><a href="">Workshops</a></li>
         </ul>
       </div>
       <header>
