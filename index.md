@@ -4,12 +4,14 @@
 
 layout: default
 ---
-# Introduction to R
-
+# Quick links
 ## Before the workshop
 
-1. [Installing R and R Studio](https://tim9800.github.io/r_workshop_2024/installation.html)
-2. [Installing tools for compiling packages](https://tim9800.github.io/r_workshop_2024/compilation.html)
-3. [Installing `tidyverse`](https://tim9800.github.io/r_workshop_2024/tidyverse.html)
+* [Installing R and R Studio](installation.html)
+* [Installing `tidyverse`](tidyverse.html)
 
-	* STEP 3 IS OPTIONAL. We will go through this step in the workshop as well, but it will be handy if you can do this step before coming
+## Workshops
+* [Workshop 1 - Introduction to R](W1_intro_R.html)
+* [Workshop 2 - Plots and statistical testing](W2_plots_stats.html)
+
+
