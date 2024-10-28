@@ -1,4 +1,19 @@
 
+# Introduction to R
+
+This workshop covers the following topics:
+
+1. What is R?
+2. The RStudio interface
+3. Objects
+4. Working with external data
+5. Data wrangling with tidyverse
+    * `select()`
+    * `|>`
+    * `filter()`
+    * `mutate()`
+
+
 ## Workshop materials
 
 * [Presentation slides](https://tim9800.github.io/r_workshop_2024/slides1/slides1.html)
