@@ -3,8 +3,7 @@ layout: default
 ---
 
 # Installing R and RStudio
-You will need to install both R and RStudio to follow this workshop. The process is straightforward
-and essentially the same for both Mac and Windows.
+You will need to install both R and RStudio to get the most of these workshops. The process is straightforward and essentially the same for both Mac and Windows.
 
 ## Installing R
 
@@ -41,6 +40,6 @@ Mac users should also install XQuartz, a program which is needed for drawing plo
 4. Open RStudio and verify that it works
 
 
-You have followed these instructions properly if the **bottom left** of your RStudio window looks similar to this:
+You have followed these instructions properly if your console (the **bottom left** of your RStudio window) looks like this:
 
 ![verify install](https://raw.githubusercontent.com/tim9800/r_workshop_2024/master/img/install.png)

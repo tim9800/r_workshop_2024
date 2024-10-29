@@ -3,7 +3,7 @@ layout: default
 ---
 
 # Installing `tidyverse`
-`tidyverse` is an R package that we will use during the workshop. A package is an extension of R that is not part of R itself, so it needs to be downloaded in addition to R and RStudio.
+`tidyverse` is an R package we will use throughout the workshops. A package is an extension of R that is not part of R itself, and needs to be downloaded in addition to R and RStudio.
 
 1. Make sure you have completed [Installing R and RStudio](https://tim9800.github.io/r_workshop_2024/installation.html) and [Installing tools for compiling packages](https://tim9800.github.io/r_workshop_2024/compilation.html).
 
