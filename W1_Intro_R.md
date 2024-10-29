@@ -34,7 +34,7 @@ This workshop covers the following topics:
 
 * [How to style your code (long version)](https://style.tidyverse.org/syntax.html)
 
-### Other Intro to R workshops
+## Other Intro to R workshops
 
 For if you'd like to see the same content presented differently
 

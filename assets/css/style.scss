@@ -20,11 +20,11 @@ header img {
 .navbar {
   display: flex;
   width: 860px;
-  padding: 20px 0px;
+  padding: 25px 25px;
   justify-content: right;
   position: fixed;
   top: 0px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgb(225, 242, 255);
 }
 
 .navbar ul {
@@ -50,5 +50,9 @@ header img {
 .navbar .navbar-btn:hover .navbar-dropdown {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  flex-wrap: nowrap;
+}
+
+.main-container {
+  margin-top: 50px;
 }
