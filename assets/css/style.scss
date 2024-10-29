@@ -24,6 +24,7 @@ header img {
   justify-content: right;
   position: fixed;
   top: 0px;
+  z-index: 2; // Stay on top
   background-color: rgb(225, 242, 255);
 }
 
@@ -36,7 +37,7 @@ header img {
 }
 
 .navbar li {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .navbar .navbar-dropdown {
@@ -54,5 +55,16 @@ header img {
 }
 
 .main-container {
-  margin-top: 50px;
+  position: relative;
+  margin-top: 74px;
+}
+
+@media print, screen and (max-width: 960px) {
+
+
+  .downloads {
+    float:none;
+    position:static;
+    width:auto;
+  }
 }
