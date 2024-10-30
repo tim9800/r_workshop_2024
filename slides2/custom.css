@@ -1,0 +1,12 @@
+.ggplot2-title {
+  background-image: url(https://tim9800.github.io/r_workshop_2024/img/ggplot2_logo.png);
+  background-size: 240px 277px;
+}
+
+.embed-right-icon img {
+  float: right;
+  z-index:;
+  height: 100px;
+  width: auto;
+  margin-left: 15px;
+}
