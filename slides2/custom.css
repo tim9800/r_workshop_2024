@@ -10,3 +10,29 @@
   width: auto;
   margin-left: 15px;
 }
+
+/* Inline code and block code formatting */
+.remark-inline-code{
+  background: #E0E0E0;
+  padding: 2px;
+  color: #000000;
+  border-radius: 3px;
+}
+  
+.remark-code{
+  border-radius: 10px;
+}
+
+/* Footer */
+.footer {
+  color: black;
+  position: absolute;
+  padding: 0px 64px 12px 64px;
+  font-size: 0.9rem;
+  color: #67676776;
+  bottom: 0px;
+  left: 0px;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box; /* Make entire footer fit inside parent div */
+}
