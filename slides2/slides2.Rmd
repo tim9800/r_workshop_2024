@@ -54,6 +54,36 @@ name: slides-link
 class: center middle
 
 ## https://tim9800.github.io/r_workshop_2024/slides2/slides2.html
+
+---
+
+layout: true
+
+.footer[https<!-- -->://tim9800.github.io/r_workshop_2024/slides2/slides2.html]
+---
+
+
+name: housekeeping
+
+## Housekeeping
+
+1. Did you bring a laptop (Mac or Windows)?
+
+2. Have you downloaded R and RStudio?
+
+3. **Have you downloaded XCode (Mac only)?**
+    * Allows Mac users to display plots properly
+    
+### Quick tips
+
+* Hit `Ctrl + Enter` or `⌘ + Enter` to run lines of code quickly
+
+* You can copy code from these slides easily. Click 'Copy Code' on the top right of any code chunk
+
+```{r}
+# Copy me!
+```
+
 ---
 name: colors
 
