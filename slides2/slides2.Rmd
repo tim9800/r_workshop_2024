@@ -98,6 +98,28 @@ name: colors
     
 
 ---
+
+## Setting up the workspace
+
+Having all your files, R scripts, and spreadsheets in one **directory** (folder)
+makes it easy to work with external data.
+
+1. Open a new R script and find a good location on your computer
+
+2. Make a folder at this location
+
+3. Go back to RStudio, and `File > Save As.. > [Location you chose]`
+
+4. Download the [workshop dataset](https://tim9800.github.io/r_workshop_2024/data/neurobio_synthetic.csv) and **put it into the folder you just made**
+
+5. Load the dataset into R by running 
+
+```{r}
+df <- read.csv("neurobio_synthetic.csv")
+```
+
+
+---
 class: inverse center middle ggplot2-title
 
 ---
@@ -127,3 +149,68 @@ library(ggplot2)
 ```
 
 ---
+
+## A broad overview
+
+`ggplot2` lets us build plots in a modular way. This means we decide what "modules" go into our plots and how these modules look like.
+
+.pull-left[
+#### Layers
+
+The modules of a `ggplot`
+* `ggplot()` is the base layer
+* Each layer has its own line of code
+* Each layer is separated by a `+`
+
+#### Aesthetics
+
+The way we control how each layer looks like
+]
+
+.pull-right[
+
+```{r, eval = F}
+
+ggplot()
+```
+
+]
+
+---
+
+## Layer up
+
+The first layer is always `ggplot()`. Try calling ggplot() without any arguments
+
+```{r, eval = F}
+ggplot()
+```
+
+Typically, you supply `ggplot()` with the **dataset** and **global aesthetics** (more on this soon).
+
+The next layers you write will depend on what you want. There are many things you can go for:
+
+* `geom_point()`: scatterplot
+* `geom_line()`: line graph
+* `geom_bar()`: bar chart, with height proportional to frequency
+* `theme_bw()`: change the theme to black and white
+* `labs()`: change the title, subtitle, X-axis label, Y-axis label etc.
+
+
+---
+
+## Aestheticking
+
+* Setting - DON'T depend on data. "Set and forget"
+
+```{r}
+```
+
+
+* Mapping - DO depend on data.
+
+Setting and mapping can be done:
+
+* Within a specific layer - aesthetic changes apply only to that layer
+
+* Within the `ggplot()` base layer - aesthetic changes apply to every layer
