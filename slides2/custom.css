@@ -36,3 +36,7 @@
   width: 100%;
   box-sizing: border-box; /* Make entire footer fit inside parent div */
 }
+
+.pull-right code {
+  font-size: 90%;
+}
