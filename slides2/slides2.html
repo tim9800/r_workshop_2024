@@ -163,7 +163,10 @@ The way we control how each layer looks like
 
 
 ``` r
-ggplot()
+ggplot(df, 
+       aes(x = ...,
+           y = ...)) +
+  geom_bar(some_aesthetic = ...)
 ```
 
 ]
@@ -172,14 +175,14 @@ ggplot()
 
 ## Layer up
 
-The first layer is always `ggplot()`. Try calling ggplot() without any arguments
+The first layer is always `ggplot()`
 
 
 ``` r
 ggplot()
 ```
 
-Typically, you supply `ggplot()` with the **dataset** and **global aesthetics** (more on this soon).
+Typically, you supply `ggplot()` with the **dataset** and **aesthetics**.
 
 The next layers you write will depend on what you want. There are many things you can go for:
 
@@ -194,11 +197,60 @@ The next layers you write will depend on what you want. There are many things yo
 
 ## Aestheticking
 
+Aesthetics can be applied in two ways:
+
+* *Setting* - setting an aesthetic to a fixed value
+
+* *Mapping* - attaching an aesthetic to a variable; the value
+of the aesthetic *depends on* the value of the variable. General syntax:
+
+
+``` r
+ggplot(df,
+       aes(aesthetic1 = some_variable_in_my_dataset,
+           aesthetic2 = other_variable_in_my_dataset))
+```
+
+
+Aesthetics can be applied in two places:
+
+* `ggplot()` - supplying aesthetics to the `ggplot()` function will propagate
+those aesthetics to every subsequent layer
+
+* Subsequent layers (e.g. `geom_()`) - supplying aesthetics at a specific layer
+will apply those changes to that layer ONLY.
+
+---
+
+
+``` r
+ggplot(df,
+*      aes(x = sex_at_birth.factor,
+*          fill = clinical_stage.factor)) +
+  geom_bar()
+```
+
+&lt;img src="slides2_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+
+---
+
+## Aestheticking
+
+You can supply some aesthetics as **arguments** to `ggplot()`, and others as
+aesthetics to the layers after that
+
+
+``` r
+ggplot(df,
+       aes(x = sex_at_birth.factor,
+           fill = clinical_stage.factor)) +
+* geom_bar(position = "dodge")
+```
+
+&lt;img src="slides2_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+
+---
 * Setting - DON'T depend on data. "Set and forget"
-
-
-
-
 * Mapping - DO depend on data.
 
 Setting and mapping can be done:
@@ -206,6 +258,10 @@ Setting and mapping can be done:
 * Within a specific layer - aesthetic changes apply only to that layer
 
 * Within the `ggplot()` base layer - aesthetic changes apply to every layer
+
+---
+
+## Example: Sex vs. clinical stage
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
