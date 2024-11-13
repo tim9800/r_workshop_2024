@@ -37,6 +37,29 @@
   box-sizing: border-box; /* Make entire footer fit inside parent div */
 }
 
-.pull-right code {
-  font-size: 90%;
+.right-code {
+  float: right;
+  width: 47%;
+}
+
+.left-code-60h-85fs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  float: left;
+  width: 47%;
+  height: 60%;
+  font-size: 85%;
+  
+  code {
+    font-size: calc(var(--code-font-size) * .85)
+  }
+}
+
+h3 {
+  margin-bottom: 0px;
+}
+
+.box {
+
 }
