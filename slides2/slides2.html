@@ -159,7 +159,7 @@ The modules of a `ggplot`
 The way we control how each layer looks like
 ]
 
-.pull-right[
+.right-code[
 
 
 ``` r
@@ -184,7 +184,7 @@ ggplot()
 
 Typically, you supply `ggplot()` with the **dataset** and **aesthetics**.
 
-The next layers you write will depend on what you want. There are many things you can go for:
+The next layers you write will depend on what you want:
 
 * `geom_point()`: scatterplot
 * `geom_line()`: line graph
@@ -197,40 +197,142 @@ The next layers you write will depend on what you want. There are many things yo
 
 ## Aestheticking
 
-Aesthetics can be applied in two ways:
+### How?
 
-* *Setting* - setting an aesthetic to a fixed value
+* *Setting* - you can set an aesthetic to a fixed value
 
-* *Mapping* - attaching an aesthetic to a variable; the value
-of the aesthetic *depends on* the value of the variable. General syntax:
+* *Mapping* - you can map an aesthetic to a variable; the value
+of the aesthetic *depends on* the value of the variable.
+
 
 
 ``` r
 ggplot(df,
-       aes(aesthetic1 = some_variable_in_my_dataset,
-           aesthetic2 = other_variable_in_my_dataset))
+       `aes`(x = sex_at_birth.factor)) + # Mapping
+  geom_bar(color = "red") # Setting
 ```
 
+--
 
-Aesthetics can be applied in two places:
+### Where?
 
-* `ggplot()` - supplying aesthetics to the `ggplot()` function will propagate
-those aesthetics to every subsequent layer
+* inside `ggplot()` - propagates the aesthetic to every layer
 
-* Subsequent layers (e.g. `geom_()`) - supplying aesthetics at a specific layer
-will apply those changes to that layer ONLY.
+* inside other layers - applies the aesthetic to THAT LAYER ONLY
 
 ---
 
+## Sex at birth
+
+The `x` aesthetic is the thing you want on your x-axis. Often, this is some
+variable in your dataset.
+
+.left-code-60h-85fs[
 
 ``` r
 ggplot(df,
-*      aes(x = sex_at_birth.factor,
-*          fill = clinical_stage.factor)) +
+*      aes(x = sex_at_birth.factor)) +
   geom_bar()
 ```
 
-&lt;img src="slides2_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+.box[
+**How**: We *map* the x aesthetic to `sex_at_birth.factor`
+
+**Where**:  inside `ggplot()`
+]
+
+]
+
+.pull-right[
+&lt;img src="slides2_files/figure-html/plot-sex-out-1.png" width="100%" /&gt;
+]
+
+
+---
+
+## Sex at birth
+
+The `fill` aesthetic changes the fill colour ("inside" colour) of the layer
+you apply it to.
+
+.left-code-60h-85fs[
+
+``` r
+ggplot(df,
+       aes(x = sex_at_birth.factor)) + 
+* geom_bar(fill = "red")
+```
+
+.box[
+**How**: We *set* the `fill` aesthetic to the fixed value of `"red"`
+
+**Where**:  inside the `geom_bar()` layer
+]
+
+]
+
+.pull-right[
+&lt;img src="slides2_files/figure-html/plot-sex-fillRed-out-1.png" width="100%" /&gt;
+]
+
+
+---
+
+## Sex by clinical stage
+
+Instead of setting `fill` to a fixed value, lets make it so that the `fill` of 
+each bar is mapped to the participant's clinical stage
+
+.left-code-60h-85fs[
+
+``` r
+ggplot(df,
+       aes(x = sex_at_birth.factor)) + 
+  geom_bar(
+*   aes(fill = clinical_stage.factor))
+```
+
+.box[
+**How**: We *map* the `fill` aesthetic to `clinical_stage.factor`
+
+**Where**:  inside the `geom_bar()` layer
+]
+
+]
+
+.pull-right[
+&lt;img src="slides2_files/figure-html/plot-sex-by-cs-out-1.png" width="100%" /&gt;
+]
+
+
+---
+
+## Sex by clinical stage
+
+Let's put the legend in a better place
+&lt;br&gt;
+&lt;br&gt;
+
+.left-code-60h-85fs[
+
+``` r
+ggplot(df,
+       aes(x = sex_at_birth.factor)) + 
+  geom_bar(
+    aes(fill = clinical_stage.factor)) +
+* theme(legend.position = "bottom")
+```
+
+.box[
+**How**: We *set* the `legend.position` aesthetic to `"bottom"`
+
+**Where**:  inside the `theme()` layer
+]
+]
+
+.pull-right[
+&lt;img src="slides2_files/figure-html/plot-sex-by-cs-legend-out-1.png" width="100%" /&gt;
+]
 
 ---
 
@@ -247,7 +349,7 @@ ggplot(df,
 * geom_bar(position = "dodge")
 ```
 
-&lt;img src="slides2_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+&lt;img src="slides2_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
 
 ---
 * Setting - DON'T depend on data. "Set and forget"
@@ -269,6 +371,7 @@ Setting and mapping can be done:
 "slideNumberFormat": "%current%",
 "highlightStyle": "tomorrow-night-bright",
 "highlightLines": true,
+"highlightSpans": true,
 "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {

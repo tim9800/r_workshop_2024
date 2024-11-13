@@ -11,6 +11,7 @@ output:
       slideNumberFormat: "%current%"
       highlightStyle: tomorrow-night-bright
       highlightLines: true
+      highlightSpans: true
       countIncrementalSlides: false
 ---
 
@@ -167,7 +168,7 @@ The modules of a `ggplot`
 The way we control how each layer looks like
 ]
 
-.pull-right[
+.right-code[
 
 ```{r, eval = F}
 ggplot(df, 
@@ -190,7 +191,7 @@ ggplot()
 
 Typically, you supply `ggplot()` with the **dataset** and **aesthetics**.
 
-The next layers you write will depend on what you want. There are many things you can go for:
+The next layers you write will depend on what you want:
 
 * `geom_point()`: scatterplot
 * `geom_line()`: line graph
@@ -203,36 +204,141 @@ The next layers you write will depend on what you want. There are many things yo
 
 ## Aestheticking
 
-Aesthetics can be applied in two ways:
+### How?
 
-* *Setting* - setting an aesthetic to a fixed value
+* *Setting* - you can set an aesthetic to a fixed value
 
-* *Mapping* - attaching an aesthetic to a variable; the value
-of the aesthetic *depends on* the value of the variable. General syntax:
+* *Mapping* - you can map an aesthetic to a variable; the value
+of the aesthetic *depends on* the value of the variable.
+
 
 ```{r, eval = F}
 ggplot(df,
-       aes(aesthetic1 = some_variable_in_my_dataset,
-           aesthetic2 = other_variable_in_my_dataset))
+       `aes`(x = sex_at_birth.factor)) + # Mapping
+  geom_bar(color = "red") # Setting
 ```
 
+--
 
-Aesthetics can be applied in two places:
+### Where?
 
-* `ggplot()` - supplying aesthetics to the `ggplot()` function will propagate
-those aesthetics to every subsequent layer
+* inside `ggplot()` - propagates the aesthetic to every layer
 
-* Subsequent layers (e.g. `geom_()`) - supplying aesthetics at a specific layer
-will apply those changes to that layer ONLY.
+* inside other layers - applies the aesthetic to THAT LAYER ONLY
 
 ---
 
-```{r}
+## Sex at birth
+
+The `x` aesthetic is the thing you want on your x-axis. Often, this is some
+variable in your dataset.
+
+.left-code-60h-85fs[
+```{r plot-sex, eval = FALSE}
 ggplot(df,
-       aes(x = sex_at_birth.factor, #<<
-           fill = clinical_stage.factor)) + #<<
+       aes(x = sex_at_birth.factor)) + #<<
   geom_bar()
 ```
+
+.box[
+**How**: We *map* the x aesthetic to `sex_at_birth.factor`
+
+**Where**:  inside `ggplot()`
+]
+
+]
+
+.pull-right[
+```{r plot-sex-out, ref.label="plot-sex", out.width="100%", echo = FALSE, fig.dim=c(4.8, 4.5)}
+```
+]
+
+
+---
+
+## Sex at birth
+
+The `fill` aesthetic changes the fill colour ("inside" colour) of the layer
+you apply it to.
+
+.left-code-60h-85fs[
+```{r plot-sex-fillRed, eval = FALSE}
+ggplot(df,
+       aes(x = sex_at_birth.factor)) + 
+  geom_bar(fill = "red") #<<
+```
+
+.box[
+**How**: We *set* the `fill` aesthetic to the fixed value of `"red"`
+
+**Where**:  inside the `geom_bar()` layer
+]
+
+]
+
+.pull-right[
+```{r plot-sex-fillRed-out, ref.label="plot-sex-fillRed", out.width="100%", echo = FALSE, fig.dim=c(4.8, 4.5)}
+```
+]
+
+
+---
+
+## Sex by clinical stage
+
+Instead of setting `fill` to a fixed value, lets make it so that the `fill` of 
+each bar is mapped to the participant's clinical stage
+
+.left-code-60h-85fs[
+```{r plot-sex-by-cs, eval = FALSE}
+ggplot(df,
+       aes(x = sex_at_birth.factor)) + 
+  geom_bar(
+    aes(fill = clinical_stage.factor)) #<<
+```
+
+.box[
+**How**: We *map* the `fill` aesthetic to `clinical_stage.factor`
+
+**Where**:  inside the `geom_bar()` layer
+]
+
+]
+
+.pull-right[
+```{r plot-sex-by-cs-out, ref.label="plot-sex-by-cs", out.width="100%", echo = FALSE, fig.dim=c(4.8, 4.5)}
+```
+]
+
+
+---
+
+## Sex by clinical stage
+
+Let's put the legend in a better place
+<br>
+<br>
+
+.left-code-60h-85fs[
+```{r plot-sex-by-cs-legend, eval = FALSE}
+ggplot(df,
+       aes(x = sex_at_birth.factor)) + 
+  geom_bar(
+    aes(fill = clinical_stage.factor)) +
+  theme(legend.position = "bottom") #<<
+```
+
+.box[
+**How**: We *set* the `legend.position` aesthetic to `"bottom"`
+
+**Where**:  inside the `theme()` layer
+]
+]
+
+.pull-right[
+```{r plot-sex-by-cs-legend-out, ref.label="plot-sex-by-cs-legend", out.width="100%", echo = FALSE, fig.dim=c(4.8, 4.5)}
+```
+]
 
 ---
 
