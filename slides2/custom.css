@@ -42,17 +42,17 @@
   width: 47%;
 }
 
-.left-code-60h-85fs {
+.left-code-60h-80fs {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   float: left;
   width: 47%;
   height: 60%;
-  font-size: 85%;
+  font-size: 80%;
   
   code {
-    font-size: calc(var(--code-font-size) * .85)
+    font-size: calc(var(--code-font-size) * .80)
   }
 }
 
