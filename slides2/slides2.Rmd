@@ -236,7 +236,7 @@ of the aesthetic *depends on* the value of the variable.
 
 ```{r, eval = F}
 ggplot(df,
-       `aes`(x = sex_at_birth.factor)) + # Mapping
+       `aes`(x = sex_at_birth)) + # Mapping
   geom_bar(color = "red") # Setting
 ```
 
@@ -255,15 +255,15 @@ ggplot(df,
 The `x` aesthetic is the thing you want on your x-axis. Often, this is some
 variable in your dataset.
 
-.left-code-60h-85fs[
+.left-code-60h-80fs[
 ```{r plot-sex, eval = FALSE}
 ggplot(df,
-       aes(x = sex_at_birth.factor)) + #<<
+       aes(x = sex_at_birth)) + #<<
   geom_bar()
 ```
 
 .box[
-**How**: We *map* the x aesthetic to `sex_at_birth.factor`
+**How**: We *map* the x aesthetic to `sex_at_birth`
 
 **Where**:  inside `ggplot()`
 ]
@@ -283,10 +283,10 @@ ggplot(df,
 The `fill` aesthetic changes the fill colour ("inside" colour) of the layer
 you apply it to.
 
-.left-code-60h-85fs[
+.left-code-60h-80fs[
 ```{r plot-sex-fillRed, eval = FALSE}
 ggplot(df,
-       aes(x = sex_at_birth.factor)) + 
+       aes(x = sex_at_birth)) + 
   geom_bar(fill = "red") #<<
 ```
 
@@ -308,19 +308,20 @@ ggplot(df,
 
 ## Sex by clinical stage
 
-Instead of setting `fill` to a fixed value, lets make it so that the `fill` of 
-each bar is mapped to the participant's clinical stage
+Instead of setting `fill` to a fixed value, let's make the `fill` of each bar
+vary based on the levels of the clinical stage variable
 
-.left-code-60h-85fs[
+.left-code-60h-80fs[
 ```{r plot-sex-by-cs, eval = FALSE}
 ggplot(df,
-       aes(x = sex_at_birth.factor)) + 
+       aes(x = sex_at_birth)) + 
   geom_bar(
-    aes(fill = clinical_stage.factor)) #<<
+    aes(fill = clin_stage)) #<<
 ```
 
+
 .box[
-**How**: We *map* the `fill` aesthetic to `clinical_stage.factor`
+**How**: We *map* the `fill` aesthetic to `clin_stage`
 
 **Where**:  inside the `geom_bar()` layer
 ]
@@ -341,12 +342,12 @@ Let's put the legend in a better place
 <br>
 <br>
 
-.left-code-60h-85fs[
+.left-code-60h-80fs[
 ```{r plot-sex-by-cs-legend, eval = FALSE}
 ggplot(df,
-       aes(x = sex_at_birth.factor)) + 
+       aes(x = sex_at_birth)) + 
   geom_bar(
-    aes(fill = clinical_stage.factor)) +
+    aes(fill = clin_stage)) +
   theme(legend.position = "bottom") #<<
 ```
 
@@ -364,28 +365,70 @@ ggplot(df,
 
 ---
 
-## Aestheticking
+## Sex by clinical stage
 
-You can supply some aesthetics as **arguments** to `ggplot()`, and others as
-aesthetics to the layers after that
+And change the layout of the bars from `stack` (the default) to `dodge`
+<br>
+<br>
 
-```{r}
+.left-code-60h-80fs[
+```{r plot-sex-by-cs-dodge, eval = FALSE}
 ggplot(df,
-       aes(x = sex_at_birth.factor,
-           fill = clinical_stage.factor)) +
-  geom_bar(position = "dodge") #<<
+       aes(x = sex_at_birth)) + 
+  geom_bar(
+    aes(fill = clin_stage),
+    position = "dodge") + #<<
+  theme(legend.position = "bottom")
 ```
 
+
+.box[
+**How**: We *set* the `position` aesthetic to `"dodge"`
+
+**Where**:  inside the `geom_bar()` layer
+]
+
+]
+
+.pull-right[
+```{r plot-sex-by-cs-dodge-out, ref.label="plot-sex-by-cs-dodge", out.width="100%", echo = FALSE, fig.dim=c(4.8, 4.5)}
+```
+]
+
 ---
-* Setting - DON'T depend on data. "Set and forget"
-* Mapping - DO depend on data.
 
-Setting and mapping can be done:
+## Sex by clinical stage
 
-* Within a specific layer - aesthetic changes apply only to that layer
+And change the layout of the bars from `stack` (the default) to `dodge`
+<br>
+<br>
 
-* Within the `ggplot()` base layer - aesthetic changes apply to every layer
+.left-code-60h-80fs[
+```{r plot-sex-by-cs-labels, eval = FALSE}
+ggplot(df,
+       aes(x = sex_at_birth)) + 
+  geom_bar(
+    aes(fill = clin_stage),
+    position = "dodge") + 
+  labs( #<<
+    title = "Sex vs. clinical stage in the Neurobiology cohort",
+    x = "Sex at birth", #<<
+    y = "Frequency" #<<
+  ) + #<< 
+  theme(legend.position = "bottom")
+```
 
----
 
-## Example: Sex vs. clinical stage
+.box[
+**How**: We *set* the `x`, `y` and `title` aesthetics to their respective names
+
+**Where**:  inside the `labs()` layer
+]
+
+]
+
+.pull-right[
+```{r plot-sex-by-cs-labels-out, ref.label="plot-sex-by-cs-labels", out.width="100%", echo = FALSE, fig.dim=c(4.8, 4.5)}
+```
+]
+
