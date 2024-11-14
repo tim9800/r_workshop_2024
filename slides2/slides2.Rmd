@@ -121,6 +121,28 @@ df <- read.csv("neurobio_synthetic.csv")
 
 
 ---
+
+## Quick data wrangle and recap
+
+We are going to wrangle `df` a little bit to make our lives easier
+
+```{r}
+library(tidyverse)
+
+df <- df |> # Pipe
+  # 1. Shorten long variable names
+  rename(
+    sex_at_birth = sex_at_birth.factor, # new_name = old_name
+    clin_stage = clinical_stage.factor
+  ) |>
+  # 2. Select observations that meet the conditions...
+  filter(
+    !is.na(sex_at_birth) & !is.na(clin_stage)
+  )
+```
+
+
+---
 class: inverse center middle ggplot2-title
 
 ---
