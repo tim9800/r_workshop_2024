@@ -250,7 +250,7 @@ ggplot(df,
 
 ---
 
-## Sex at birth
+## 1. The `x`-factor
 
 The `x` aesthetic is the thing you want on your x-axis. Often, this is some
 variable in your dataset.
@@ -278,7 +278,7 @@ ggplot(df,
 
 ---
 
-## Sex at birth
+## 2. Setting the `fill`
 
 The `fill` aesthetic changes the fill colour ("inside" colour) of the layer
 you apply it to.
@@ -306,10 +306,9 @@ ggplot(df,
 
 ---
 
-## Sex by clinical stage
+## 3. Mapping the `fill`
 
-Instead of setting `fill` to a fixed value, let's make the `fill` of each bar
-vary based on the levels of the clinical stage variable
+Instead of setting `fill` to a fixed value, let's map it to the levels of the clinical stage variable
 
 .left-code-60h-80fs[
 ```{r plot-sex-by-cs, eval = FALSE}
@@ -336,7 +335,7 @@ ggplot(df,
 
 ---
 
-## Sex by clinical stage
+## 4. Legend placement
 
 Let's put the legend in a better place
 <br>
@@ -365,11 +364,9 @@ ggplot(df,
 
 ---
 
-## Sex by clinical stage
+## 5. `position` of the bars
 
-And change the layout of the bars from `stack` (the default) to `dodge`
-<br>
-<br>
+And change the layout of the bars to `dodge` (by default, the bars are in `stack` mode)
 
 .left-code-60h-80fs[
 ```{r plot-sex-by-cs-dodge, eval = FALSE}
@@ -397,9 +394,9 @@ ggplot(df,
 
 ---
 
-## Sex by clinical stage
+## 6. Titles
 
-And change the layout of the bars from `stack` (the default) to `dodge`
+Give the plot a better title and axes names
 <br>
 <br>
 
@@ -411,7 +408,7 @@ ggplot(df,
     aes(fill = clin_stage),
     position = "dodge") + 
   labs( #<<
-    title = "Sex vs. clinical stage in the Neurobiology cohort",
+    title = "Sex vs. clinical stage in the Neurobiology cohort", #<<
     x = "Sex at birth", #<<
     y = "Frequency" #<<
   ) + #<< 
@@ -431,4 +428,70 @@ ggplot(df,
 ```{r plot-sex-by-cs-labels-out, ref.label="plot-sex-by-cs-labels", out.width="100%", echo = FALSE, fig.dim=c(4.8, 4.5)}
 ```
 ]
+
+---
+
+## 7. Legend title
+
+Finally, let's spruce up the legend title
+<br>
+<br>
+
+.left-code-60h-80fs[
+```{r plot-sex-by-cs-legendtitle, eval = FALSE}
+ggplot(df,
+       aes(x = sex_at_birth)) + 
+  geom_bar(
+    aes(fill = clin_stage),
+    position = "dodge") + 
+  labs(
+    title = "Sex vs. clinical stage in the Neurobiology cohort",
+    x = "Sex at birth",
+    y = "Frequency"
+  ) +
+  theme(legend.position = "bottom") +
+  scale_fill_discrete(  #<<
+    name = "Clinical Stage") #<<
+```
+
+
+.box[
+**How**: We *set* the `name` aesthetic to "Clinical Stage"
+
+**Where**:  inside the `scale_fill_discrete()` layer
+]
+
+]
+
+.pull-right[
+```{r plot-sex-by-cs-legendtitle-out, ref.label="plot-sex-by-cs-legendtitle", out.width="100%", echo = FALSE, fig.dim=c(4.8, 4.5)}
+```
+]
+
+---
+
+## Google is your friend
+
+ggplot2 is VERY flexible and contains an overwhelming number of options you can spend hours tweaking
+
+* Often, what you want to get out of `ggplot` is one well-worded google search away.
+
+  * Stackoverflow
+  * Posit Community
+  * Reddit
+
+* If you can't find what you're looking for in 5 minutes, **ask someone**
+
+---
+class: inverse center middle
+
+# Statistical testing
+
+---
+
+
+
+---
+
+
 
