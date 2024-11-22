@@ -1,4 +1,6 @@
-
+---
+layout: default
+---
 # Introduction to R
 
 This workshop covers the following topics:
