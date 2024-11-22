@@ -11,7 +11,7 @@ layout: default
 * [Installing `tidyverse`](tidyverse.html)
 
 ## Workshops
-* [Workshop 1 - Introduction to R](W1_intro_R.html)
+* [Workshop 1 - Introduction to R](W1_Intro_R.html)
 * [Workshop 2 - Plots and statistical testing](W2_plots_stats.html)
 
 
