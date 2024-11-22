@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+*Workshop 2 is currently under construction!!* If you would like to see a topic covered in this workshop, and the topic falls under the workshop's scope (Plots and statistical testing in R), let me know!
+
 # Introduction to R
 
 This workshop covers the following topics:
